@@ -23,8 +23,19 @@ public class attackScript : MonoBehaviour
     {
         
     }
-    
-     void Attack()
+    public void enemyChoose()
+    {
+        for (int i = 0; i < lists.enemies.Length; i++)
+        {
+            lists.buttons[i].GetComponentInChildren<Text>().text = lists.enemies[i].name;
+            lists.buttons[i + 1].GetComponentInChildren<Text>().text = "";
+            lists.buttons[i + 1].GetComponent<Button>().interactable = false;
+            lists.buttons[3].GetComponentInChildren<Text>().text = "Back";
+        }
+        
+
+    }
+    void Attack()
     {
         foreach (GameObject button in lists.buttons)
         {
@@ -50,10 +61,7 @@ public class attackScript : MonoBehaviour
             button.GetComponent<Button>().interactable = true;
         }
     }
-    public void enemyChoose()
-    {
-        
-    }
+    
     
    
 }
