@@ -8,6 +8,7 @@ public class enemyStats : MonoBehaviour
     public float SP;
     public float attack;
     public float def;
+    public float speed;
     // Start is called before the first frame update
     void Start()
     {
