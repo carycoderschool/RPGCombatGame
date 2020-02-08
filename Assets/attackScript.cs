@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System.Linq;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
@@ -8,22 +9,24 @@ public class attackScript : MonoBehaviour
 {
     public objectLists lists;
     
-    GameObject playerT;
-    GameObject enemy;
-    characterStats player;
+    GameObject thatTarget;
+    GameObject target;
+    characterStats attacker;
      float damage;
     
     // Start is called before the first frame update
     void Start()
     {
         
-        player = gameObject.GetComponent<characterStats>();
+        attacker = gameObject.GetComponent<characterStats>();
     }
 
     // Update is called once per frame
     void Update()
     {
-        
+        List<characterStats> stats = new List<characterStats>();
+
+        List<characterStats> sortedStats = stats.OrderBy(s => s.speed).ToList();
     }
     public void enemyChoose()
     {
@@ -31,8 +34,9 @@ public class attackScript : MonoBehaviour
         {
             lists.buttons[i].GetComponentInChildren<Text>().text = lists.enemies[i].name;
             lists.buttons[i].GetComponent<Button>().interactable = true;
+            GameObject enemy = lists.enemies[i];
             lists.buttons[i].GetComponent<Button>().onClick.RemoveAllListeners();
-            lists.buttons[i].GetComponent<Button>().onClick.AddListener(TurnOrder);
+            lists.buttons[i].GetComponent<Button>().onClick.AddListener(() => Attack(enemy));
             lists.buttons[i + 1].GetComponentInChildren<Text>().text = "";
             lists.buttons[i + 1].GetComponent<Button>().interactable = false;
         }
@@ -45,55 +49,46 @@ public class attackScript : MonoBehaviour
 
     void TurnOrder()
     {
-        GameObject speedestEnemy;
-        GameObject speedestChar;
+        GameObject speedestEnemy = null;
+        GameObject speedestChar= null;
         float mostSpeedE = 0;
         float mostSpeedC = 0;
-        foreach(var enemy in lists.enemies)
-        {
-            var sped = enemy.GetComponent<enemyStats>().speed;
-            if (sped > mostSpeedE)
-            {
-                mostSpeedE = sped;
-                speedestEnemy = enemy;
-            }
-        }
-        foreach(var character in lists.chars) 
-        {
-            var sped = character.GetComponent<characterStats>().speed;
-            if (sped > mostSpeedC)
-            {
-                mostSpeedC = sped;
-                speedestChar = character;
-            }
-        }
+        
+        
+        
     }
-    void Attack()
+    void playerTurn()
     {
-        enemy = GameObject.Find(EventSystem.current.currentSelectedGameObject.GetComponentInChildren<Text>().text);
+        foreach (GameObject button in lists.buttons)
+        {
+            button.GetComponent<Button>().interactable = true;
+        }
+       
+    }
+    void Attack(GameObject enemy)
+    {
+
+       
         foreach (GameObject button in lists.buttons)
         {
             button.GetComponent<Button>().interactable = false;
             
         }
-        damage = player.attack - enemy.GetComponent<enemyStats>().def;
+        damage = attacker.attack - enemy.GetComponent<enemyStats>().def;
         enemy.GetComponent<enemyStats>().HP -= damage;
         
-        StartCoroutine(enemyTurn()); 
+         
     }
-    IEnumerator enemyTurn()
+    IEnumerator enemyTurn(GameObject player)
     {
         yield return new WaitForSeconds(2f);
         
         int ran = Random.Range(0, lists.chars.Length);
-        playerT = lists.chars[ran];
-        damage = enemy.GetComponent<enemyStats>().attack - player.def;
-        player.HP -= damage;
+        thatTarget = lists.chars[ran];
+        damage = target.GetComponent<enemyStats>().attack - attacker.def;
+        attacker.HP -= damage;
         yield return new WaitForSeconds(2f);
-        foreach (GameObject button in lists.buttons)
-        {
-            button.GetComponent<Button>().interactable = true;
-        }
+        
     }
     void Back()
     {

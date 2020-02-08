@@ -23,7 +23,7 @@ public class characterStats : MonoBehaviour
     }
 
     // Update is called once per frame
-    void Update()
+    void UpdateDisplay()
     {
         sp.text = "SP:" + SP.ToString() + "/" + ogSP.ToString();
         hp.text = "HP:" + HP.ToString() + "/" + ogHP.ToString();
