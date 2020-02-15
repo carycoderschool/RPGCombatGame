@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class characterStats : MonoBehaviour
+public class baseStats : MonoBehaviour
 {
     public float HP;
     public float SP;
@@ -28,6 +28,10 @@ public class characterStats : MonoBehaviour
     {
         sp.text = "SP:" + SP.ToString() + "/" + ogSP.ToString();
         hp.text = "HP:" + HP.ToString() + "/" + ogHP.ToString();
+    }
+    public virtual void SpecialAttack(string statusEffect, int cost, bool multiple, baseStats attacker)
+    {
+        
     }
 
 }
