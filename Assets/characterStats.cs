@@ -10,6 +10,7 @@ public class characterStats : MonoBehaviour
     public float def;
     public float attack;
     public float speed;
+    public bool turn;
     public Text sp;
     public Text hp;
     float ogHP;

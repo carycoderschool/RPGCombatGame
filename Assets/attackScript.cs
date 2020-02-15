@@ -8,7 +8,7 @@ using UnityEngine.EventSystems;
 public class attackScript : MonoBehaviour
 {
     public objectLists lists;
-    
+    public List<characterStats> stats = new List<characterStats>();
     GameObject thatTarget;
     GameObject target;
     characterStats attacker;
@@ -18,15 +18,28 @@ public class attackScript : MonoBehaviour
     void Start()
     {
         
-        attacker = gameObject.GetComponent<characterStats>();
+        
+        for (int i = 0; i < lists.enemies.Length; i++)
+        {
+            stats.Add(lists.enemies[i].GetComponent<characterStats>());
+        }
+        for (int i = 0; i < lists.chars.Length; i++)
+        {
+            stats.Add(lists.chars[i].GetComponent<characterStats>());
+        }
+        TurnOrder();
+    }
+     void Reset()
+    {
+        TurnOrder();  
     }
 
     // Update is called once per frame
     void Update()
     {
-        List<characterStats> stats = new List<characterStats>();
+        
 
-        List<characterStats> sortedStats = stats.OrderBy(s => s.speed).ToList();
+        
     }
     public void enemyChoose()
     {
@@ -49,20 +62,58 @@ public class attackScript : MonoBehaviour
 
     void TurnOrder()
     {
-        GameObject speedestEnemy = null;
-        GameObject speedestChar= null;
-        float mostSpeedE = 0;
-        float mostSpeedC = 0;
+        List<characterStats> sortedStats = stats.OrderBy(s => s.speed).ToList();
+        for (int i = 0; i < sortedStats.Count; i++)
+        {
+            if (sortedStats[i].gameObject.tag == "Player" && sortedStats[i].turn == false)
+            {
+                
+                sortedStats[i].turn = true;
+                attacker = sortedStats[i];
+                
+                playerTurn();
+                
+                
+            } else if (sortedStats[i].gameObject.tag == "enemy" && sortedStats[i].turn == false)
+            {
+                sortedStats[i].turn = true;
+                int ran = Random.Range(0, lists.chars.Length);
+                target = lists.chars[ran];
+                attacker = sortedStats[i];
+                StartCoroutine(enemyAttack(target));
+                
+            } else
+            {
+                foreach (characterStats stat in sortedStats)
+                {
+                    stat.turn = false;
+                    
+                    
+                }
+                Reset();
+            }
+            
+            
+        }
         
         
         
     }
     void playerTurn()
     {
+        
+       
         foreach (GameObject button in lists.buttons)
         {
             button.GetComponent<Button>().interactable = true;
         }
+        lists.buttons[0].GetComponentInChildren<Text>().text = "Attack";
+        lists.buttons[0].GetComponent<Button>().onClick.RemoveAllListeners();
+        lists.buttons[0].GetComponent<Button>().onClick.AddListener(enemyChoose);
+        lists.buttons[0].GetComponent<Button>().Select();
+        lists.buttons[1].GetComponentInChildren<Text>().text = "Items";
+        lists.buttons[2].GetComponentInChildren<Text>().text = "Special Attacks";
+        lists.buttons[3].GetComponentInChildren<Text>().text = "Run";
        
     }
     void Attack(GameObject enemy)
@@ -74,21 +125,21 @@ public class attackScript : MonoBehaviour
             button.GetComponent<Button>().interactable = false;
             
         }
-        damage = attacker.attack - enemy.GetComponent<enemyStats>().def;
-        enemy.GetComponent<enemyStats>().HP -= damage;
+        damage = attacker.attack - enemy.GetComponent<characterStats>().def;
+        enemy.GetComponent<characterStats>().HP -= damage;
+        TurnOrder();
         
          
     }
-    IEnumerator enemyTurn(GameObject player)
+    IEnumerator enemyAttack(GameObject target)
     {
         yield return new WaitForSeconds(2f);
         
-        int ran = Random.Range(0, lists.chars.Length);
-        thatTarget = lists.chars[ran];
-        damage = target.GetComponent<enemyStats>().attack - attacker.def;
-        attacker.HP -= damage;
+       
+        damage = attacker.GetComponent<characterStats>().attack - target.GetComponent<characterStats>().def;
+        target.GetComponent<characterStats>().HP -= damage;
         yield return new WaitForSeconds(2f);
-        
+        TurnOrder();
     }
     void Back()
     {

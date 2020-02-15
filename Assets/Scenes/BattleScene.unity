@@ -186,7 +186,7 @@ MonoBehaviour:
     m_HighlightedTrigger: Highlighted
     m_PressedTrigger: Pressed
     m_DisabledTrigger: Disabled
-  m_Interactable: 1
+  m_Interactable: 0
   m_TargetGraphic: {fileID: 41414481}
   m_OnClick:
     m_PersistentCalls:
@@ -692,13 +692,17 @@ MonoBehaviour:
   m_GameObject: {fileID: 483291223}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 53f07d1c02a5c9c49bea29786d31e087, type: 3}
+  m_Script: {fileID: 11500000, guid: a81379d562f4e7b4d99a102f94d64c70, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   HP: 20
   SP: 10
-  attack: 20
   def: 5
+  attack: 5
+  speed: 11
+  turn: 0
+  sp: {fileID: 0}
+  hp: {fileID: 0}
 --- !u!1 &534669902
 GameObject:
   m_ObjectHideFlags: 0
@@ -791,7 +795,7 @@ GameObject:
   m_Component:
   - component: {fileID: 552826488}
   - component: {fileID: 552826487}
-  - component: {fileID: 552826486}
+  - component: {fileID: 552826489}
   m_Layer: 0
   m_Name: slime (2)
   m_TagString: enemy
@@ -799,22 +803,6 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!114 &552826486
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 552826485}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 53f07d1c02a5c9c49bea29786d31e087, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  HP: 20
-  SP: 10
-  attack: 20
-  def: 5
 --- !u!212 &552826487
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -877,6 +865,26 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 10
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &552826489
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 552826485}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a81379d562f4e7b4d99a102f94d64c70, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  HP: 20
+  SP: 10
+  def: 5
+  attack: 20
+  speed: 3
+  turn: 0
+  sp: {fileID: 0}
+  hp: {fileID: 0}
 --- !u!1 &584881117
 GameObject:
   m_ObjectHideFlags: 0
@@ -6427,13 +6435,13 @@ MonoBehaviour:
     m_HighlightedTrigger: Highlighted
     m_PressedTrigger: Pressed
     m_DisabledTrigger: Disabled
-  m_Interactable: 1
+  m_Interactable: 0
   m_TargetGraphic: {fileID: 1121032440}
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 1426017184}
-        m_MethodName: Attack
+        m_MethodName: enemyChoose
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -6738,7 +6746,7 @@ MonoBehaviour:
     m_HighlightedTrigger: Highlighted
     m_PressedTrigger: Pressed
     m_DisabledTrigger: Disabled
-  m_Interactable: 1
+  m_Interactable: 0
   m_TargetGraphic: {fileID: 1312813114}
   m_OnClick:
     m_PersistentCalls:
@@ -6970,6 +6978,7 @@ MonoBehaviour:
   def: 10
   attack: 10
   speed: 10
+  turn: 0
   sp: {fileID: 1211368022}
   hp: {fileID: 895506204}
 --- !u!114 &1426017184
@@ -6985,6 +6994,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   lists: {fileID: 227426922}
+  stats: []
 --- !u!1 &1488710785
 GameObject:
   m_ObjectHideFlags: 0
@@ -7103,7 +7113,7 @@ MonoBehaviour:
     m_HighlightedTrigger: Highlighted
     m_PressedTrigger: Pressed
     m_DisabledTrigger: Disabled
-  m_Interactable: 1
+  m_Interactable: 0
   m_TargetGraphic: {fileID: 1541438889}
   m_OnClick:
     m_PersistentCalls:
