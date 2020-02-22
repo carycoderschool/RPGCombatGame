@@ -6,17 +6,18 @@ using UnityEngine.Events;
 using UnityEngine.UI;
 using UnityEngine.EventSystems;
 
-public class attackScript : MonoBehaviour
+public class battleSystem : MonoBehaviour
 {
     public objectLists lists;
-    public List<BaseStats> stats = new List<BaseStats>();
+    public List<baseStats> stats = new List<baseStats>();
     GameObject thatTarget;
     GameObject target;
-    BaseStats attacker;
+    baseStats attacker;
     float damage;
     int currentActor = 0;
-    string atk = "normal";
+    public string atk = "normal";
     public delegate void SpecialDelegate(string name);
+    
     // Start is called before the first frame update
     void Start()
     {
@@ -24,11 +25,11 @@ public class attackScript : MonoBehaviour
 
         for (int i = 0; i < lists.enemies.Length; i++)
         {
-            stats.Add(lists.enemies[i].GetComponent<BaseStats>());
+            stats.Add(lists.enemies[i].GetComponent<baseStats>());
         }
         for (int i = 0; i < lists.chars.Length; i++)
         {
-            stats.Add(lists.chars[i].GetComponent<BaseStats>());
+            stats.Add(lists.chars[i].GetComponent<baseStats>());
         }
         TurnOrder();
     }
@@ -45,7 +46,7 @@ public class attackScript : MonoBehaviour
 
     }
     
-    public void enemyChoose(UnityAction specAtk)
+    public void enemyChoose()
     {
         if (atk == "normal")
         {
@@ -67,7 +68,7 @@ public class attackScript : MonoBehaviour
                 lists.buttons[i].GetComponent<Button>().interactable = true;
                 GameObject enemy = lists.enemies[i];
                 lists.buttons[i].GetComponent<Button>().onClick.RemoveAllListeners();
-                lists.buttons[i].GetComponent<Button>().onClick.AddListener(specAtk);
+                lists.buttons[i].GetComponent<Button>().onClick.AddListener(() => specialAttackChoose(enemy));
                 lists.buttons[i + 1].GetComponentInChildren<Text>().text = "";
                 lists.buttons[i + 1].GetComponent<Button>().interactable = false;
             }
@@ -82,11 +83,11 @@ public class attackScript : MonoBehaviour
 
     void TurnOrder()
     {
-        List<BaseStats> sortedStats = stats.OrderBy(s => s.speed).ToList();
+        List<baseStats> sortedStats = stats.OrderBy(s => s.speed).ToList();
        
         sortedStats.Reverse();
        
-        BaseStats currentCharTurn = sortedStats[currentActor];
+        baseStats currentCharTurn = sortedStats[currentActor];
         // Take that turn
         
         if (currentCharTurn.gameObject.tag == "Player" && currentCharTurn.turn == false)
@@ -109,7 +110,7 @@ public class attackScript : MonoBehaviour
         currentActor++;
         if (currentActor > sortedStats.Count - 1)
         {
-            foreach (BaseStats stat in sortedStats)
+            foreach (baseStats stat in sortedStats)
             {
                 stat.turn = false;
             }
@@ -126,11 +127,12 @@ public class attackScript : MonoBehaviour
             }
             lists.buttons[0].GetComponentInChildren<Text>().text = "Attack";
             lists.buttons[0].GetComponent<Button>().onClick.RemoveAllListeners();
-            lists.buttons[0].GetComponent<Button>().onClick.AddListener(() => enemyChoose(null));
+            lists.buttons[0].GetComponent<Button>().onClick.AddListener(enemyChoose);
             lists.buttons[0].GetComponent<Button>().Select();
             lists.buttons[1].GetComponentInChildren<Text>().text = "Items";
             lists.buttons[2].GetComponentInChildren<Text>().text = "Special Attacks";
-            lists.buttons[3].GetComponentInChildren<Text>().text = "Run";
+        lists.buttons[2].GetComponent<Button>().onClick.AddListener(spec);
+        lists.buttons[3].GetComponentInChildren<Text>().text = "Run";
 
         }
        
@@ -139,8 +141,8 @@ public class attackScript : MonoBehaviour
             yield return new WaitForSeconds(2f);
 
 
-            damage = attacker.GetComponent<BaseStats>().attack - target.GetComponent<BaseStats>().def;
-            target.GetComponent<BaseStats>().HP -= damage;
+            damage = attacker.GetComponent<baseStats>().attack - target.GetComponent<baseStats>().def;
+            target.GetComponent<baseStats>().HP -= damage;
             yield return new WaitForSeconds(2f);
             TurnOrder();
         }
@@ -148,6 +150,11 @@ public class attackScript : MonoBehaviour
         {
 
         }
+    void spec()
+    {
+        atk = "special";
+        enemyChoose();
+    }
 
         void Attack(GameObject enemy)
         {
@@ -158,24 +165,44 @@ public class attackScript : MonoBehaviour
             button.GetComponent<Button>().interactable = false;
 
         }
-            damage = attacker.attack - enemy.GetComponent<BaseStats>().def;
-            enemy.GetComponent<BaseStats>().HP -= damage;
+            damage = attacker.attack - enemy.GetComponent<baseStats>().def;
+            enemy.GetComponent<baseStats>().HP -= damage;
             TurnOrder();
 
 
         }
-        public void specialAttackChoose()
+        public void specialAttackChoose(GameObject enemy)
     {
-        BaseStats targetHit = target.GetComponent<BaseStats>();
-        atk = "Special";
+         
+        
         lists.buttons[0].GetComponentInChildren<Text>().text = attacker.name1;
-        UnityAction atk1;
-        atk1 += attacker.SpecialAttack1(attacker.name1 /*, "None", "None", attacker, 2, 3*/));
-        lists.buttons[0].GetComponent<Button>().onClick.AddListener(() => enemyChoose(atk1));
+
+        lists.buttons[0].GetComponent<Button>().onClick.RemoveAllListeners();
+        
+        lists.buttons[0].GetComponent<Button>().onClick.AddListener(() => attacker.SpecialAttack1(attacker.name1, "None", "None", attacker, enemy.GetComponent<baseStats>(), 2, 3));
         if (attacker.name2 != "")
         {
-
+            lists.buttons[1].GetComponentInChildren<Text>().text = attacker.name2;
+            lists.buttons[1].GetComponent<Button>().interactable = true;
+            lists.buttons[1].GetComponent<Button>().onClick.RemoveAllListeners();
+            lists.buttons[1].GetComponent<Button>().onClick.AddListener(() => attacker.SpecialAttack2(attacker.name2, "None", "None", attacker, enemy.GetComponent<baseStats>(), 2, 3));
+        } else
+        {
+            lists.buttons[1].GetComponentInChildren<Text>().text = "";
+            lists.buttons[1].GetComponent<Button>().interactable = false;
         }
+        if (attacker.name3 != "")
+        {
+            lists.buttons[2].GetComponentInChildren<Text>().text = attacker.name2;
+            lists.buttons[2].GetComponent<Button>().interactable = true;
+            lists.buttons[2].GetComponent<Button>().onClick.RemoveAllListeners();
+            lists.buttons[2].GetComponent<Button>().onClick.AddListener(() => attacker.SpecialAttack3(attacker.name2, "None", "None", attacker, enemy.GetComponent<baseStats>(), 2, 3));
+        } else
+        {
+            lists.buttons[2].GetComponentInChildren<Text>().text = "";
+            lists.buttons[2].GetComponent<Button>().interactable = false;
+        }
+
     }
 
 

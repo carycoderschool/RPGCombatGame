@@ -3,11 +3,12 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class BaseStats : MonoBehaviour
+public class baseStats : MonoBehaviour
 {
-    int specialAttackNum = 1;
+    
     public string name1;
     public string name2;
+    public string name3;
     public float HP;
     public float SP;
     public float def;
@@ -16,8 +17,8 @@ public class BaseStats : MonoBehaviour
     public bool turn;
     public Text sp;
     public Text hp;
-    float ogHP;
-    float ogSP;
+    public float ogHP;
+    public float ogSP;
 
     // Start is called before the first frame update
     void Start()
@@ -32,9 +33,17 @@ public class BaseStats : MonoBehaviour
         sp.text = "SP:" + SP.ToString() + "/" + ogSP.ToString();
         hp.text = "HP:" + HP.ToString() + "/" + ogHP.ToString();
     }
-    public virtual void SpecialAttack1(string name /*, string statusEffect, string statseffect, BaseStats attacker, BaseStats target, int damageMultiplier, int cost*/)
+    public virtual void SpecialAttack1(string name , string statusEffect, string statseffect, baseStats attacker, baseStats target, int damageMultiplier, int cost)
     {
         
+    }
+    public virtual void SpecialAttack2(string name, string statusEffect, string statseffect, baseStats attacker, baseStats target, int damageMultiplier, int cost)
+    {
+
+    }
+    public virtual void SpecialAttack3(string name, string statusEffect, string statseffect, baseStats attacker, baseStats target, int damageMultiplier, int cost)
+    {
+
     }
 
 }

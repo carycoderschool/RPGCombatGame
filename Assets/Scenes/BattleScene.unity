@@ -695,14 +695,19 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a81379d562f4e7b4d99a102f94d64c70, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  name1: 
+  name2: 
+  name3: 
   HP: 20
   SP: 10
-  def: 5
-  attack: 5
+  def: 0
+  attack: 20
   speed: 11
   turn: 0
   sp: {fileID: 0}
   hp: {fileID: 0}
+  ogHP: 0
+  ogSP: 0
 --- !u!1 &534669902
 GameObject:
   m_ObjectHideFlags: 0
@@ -877,6 +882,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a81379d562f4e7b4d99a102f94d64c70, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  name1: 
+  name2: 
+  name3: 
   HP: 20
   SP: 10
   def: 5
@@ -885,6 +893,8 @@ MonoBehaviour:
   turn: 0
   sp: {fileID: 0}
   hp: {fileID: 0}
+  ogHP: 0
+  ogSP: 0
 --- !u!1 &584881117
 GameObject:
   m_ObjectHideFlags: 0
@@ -6890,8 +6900,8 @@ GameObject:
   m_Component:
   - component: {fileID: 1426017182}
   - component: {fileID: 1426017181}
-  - component: {fileID: 1426017183}
   - component: {fileID: 1426017184}
+  - component: {fileID: 1426017183}
   m_Layer: 0
   m_Name: Player1
   m_TagString: Player
@@ -6970,17 +6980,22 @@ MonoBehaviour:
   m_GameObject: {fileID: 1426017180}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a81379d562f4e7b4d99a102f94d64c70, type: 3}
+  m_Script: {fileID: 11500000, guid: f938d15100665354fa37ad2a0921899c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  name1: Super Punch
+  name2: Heal
+  name3: 
   HP: 200
-  SP: 20
-  def: 10
-  attack: 10
-  speed: 12
+  SP: 10
+  def: 5
+  attack: 5
+  speed: 10
   turn: 0
-  sp: {fileID: 1211368022}
-  hp: {fileID: 895506204}
+  sp: {fileID: 0}
+  hp: {fileID: 0}
+  ogHP: 200
+  ogSP: 10
 --- !u!114 &1426017184
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -6995,11 +7010,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   lists: {fileID: 227426922}
   stats: []
-  thatTarget: {fileID: 0}
-  target: {fileID: 0}
-  attacker: {fileID: 0}
-  damage: 0
-  currentActor: 0
+  atk: normal
 --- !u!1 &1488710785
 GameObject:
   m_ObjectHideFlags: 0
