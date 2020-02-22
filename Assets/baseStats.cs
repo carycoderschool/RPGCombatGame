@@ -3,8 +3,11 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class baseStats : MonoBehaviour
+public class BaseStats : MonoBehaviour
 {
+    int specialAttackNum = 1;
+    public string name1;
+    public string name2;
     public float HP;
     public float SP;
     public float def;
@@ -29,7 +32,7 @@ public class baseStats : MonoBehaviour
         sp.text = "SP:" + SP.ToString() + "/" + ogSP.ToString();
         hp.text = "HP:" + HP.ToString() + "/" + ogHP.ToString();
     }
-    public virtual void SpecialAttack(string statusEffect, int cost, bool multiple, baseStats attacker)
+    public virtual void SpecialAttack1(string name /*, string statusEffect, string statseffect, BaseStats attacker, BaseStats target, int damageMultiplier, int cost*/)
     {
         
     }
