@@ -6,21 +6,40 @@ using UnityEngine.UI;
 public class objectLists : MonoBehaviour
 {
     public GameObject[] chars;
-    public GameObject[] items;
+    public List<Item> items = new List<Item>();
     public GameObject[] enemies;
     public GameObject[] buttons;
+    public static objectLists instance;
+    public delegate void OnItemChanged();
+    public OnItemChanged onItemChangedCallback;
+    void Awake()
+    {
+        if (instance != null)
+        {
+            Debug.LogWarning("messed up");
+        }
+        instance = this;
+    }
     // Start is called before the first frame update
     void Start()
     {
         enemies = GameObject.FindGameObjectsWithTag("enemy");
         chars = GameObject.FindGameObjectsWithTag("Player");
-        items = GameObject.FindGameObjectsWithTag("item");
+        
         buttons = GameObject.FindGameObjectsWithTag("button");
     }
 
     // Update is called once per frame
-    void Update()
+    public void AddItem(Item item)
     {
-        
+        items.Add(item);
+        if (onItemChangedCallback != null)
+            onItemChangedCallback.Invoke();
+    }
+    public void Remove(Item item)
+    {
+        items.Remove(item);
+        if (onItemChangedCallback != null)
+            onItemChangedCallback.Invoke();
     }
 }

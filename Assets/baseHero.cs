@@ -17,20 +17,20 @@ public class baseHero : baseStats
     {
         
     }
-    public override void SpecialAttack1(string name , string statusEffect, string statsEffect, baseStats attacker, baseStats target, int damageMultiplier, int cost)
+    public override void SpecialAttack1(string name,  baseStats attacker, baseStats target)
     {
         
-        attacker.SP -= cost;
-        float upAttack = attacker.attack *= damageMultiplier;
+        attacker.SP -= 3;
+        float upAttack = attacker.attack *= 2;
 
         float damage = upAttack - target.def;
         target.HP -= damage;
 
     }
-    public override void SpecialAttack2(string name, string statusEffect, string statseffect, baseStats attacker, baseStats target, int damageMultiplier, int cost)
+    public override void StatusSpecialAttack1(string name, baseStats attacker)
     {
-        attacker.SP -= cost;
-        float heal = attacker.HP * .25f;
+        attacker.SP -= 3;
+        float heal = 20;
         heal = Mathf.Round(heal);
         attacker.HP += heal;
         if (attacker.HP > ogHP)

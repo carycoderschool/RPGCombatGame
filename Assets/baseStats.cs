@@ -6,9 +6,12 @@ using UnityEngine.UI;
 public class baseStats : MonoBehaviour
 {
     
-    public string name1;
-    public string name2;
-    public string name3;
+    public string physicalName1;
+    public string physicalName2;
+    public string physicalName3;
+    public string statusName1;
+    public string statusName2;
+    public string statusName3;
     public float HP;
     public float SP;
     public float def;
@@ -19,6 +22,7 @@ public class baseStats : MonoBehaviour
     public Text hp;
     public float ogHP;
     public float ogSP;
+    
 
     // Start is called before the first frame update
     void Start()
@@ -28,22 +32,35 @@ public class baseStats : MonoBehaviour
     }
 
     // Update is called once per frame
-    void UpdateDisplay()
+    public void UpdateDisplay()
     {
         sp.text = "SP:" + SP.ToString() + "/" + ogSP.ToString();
         hp.text = "HP:" + HP.ToString() + "/" + ogHP.ToString();
+
     }
-    public virtual void SpecialAttack1(string name , string statusEffect, string statseffect, baseStats attacker, baseStats target, int damageMultiplier, int cost)
+    
+    public virtual void SpecialAttack1(string name , baseStats attacker, baseStats target)
     {
         
     }
-    public virtual void SpecialAttack2(string name, string statusEffect, string statseffect, baseStats attacker, baseStats target, int damageMultiplier, int cost)
+    public virtual void SpecialAttack2(string name, baseStats attacker, baseStats target)
     {
 
     }
-    public virtual void SpecialAttack3(string name, string statusEffect, string statseffect, baseStats attacker, baseStats target, int damageMultiplier, int cost)
+    public virtual void SpecialAttack3(string name, baseStats attacker, baseStats target)
     {
 
     }
+    public virtual void StatusSpecialAttack1(string name, baseStats attacker)
+    {
 
+    }
+    public virtual void StatusSpecialAttack2(string name, baseStats attacker)
+    {
+
+    }
+    public virtual void StatusSpecialAttack3(string name, baseStats attacker)
+    {
+
+    }
 }
