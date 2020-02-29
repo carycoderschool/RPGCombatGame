@@ -17,12 +17,13 @@ public class battleSystem : MonoBehaviour
     int currentActor = 0;
     public string atk = "normal";
     public delegate void SpecialDelegate(string name);
-    
+    public Item itemPrefab;
     // Start is called before the first frame update
     void Start()
     {
-
-
+        lists.AddItem(itemPrefab);
+        lists.AddItem(itemPrefab);
+        lists.AddItem(itemPrefab);
         for (int i = 0; i < lists.enemies.Length; i++)
         {
             stats.Add(lists.enemies[i].GetComponent<baseStats>());
