@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 170076734}
-  m_IndirectSpecularColor: {r: 0.44657898, g: 0.4964133, b: 0.5748178, a: 1}
+  m_IndirectSpecularColor: {r: 0.44657874, g: 0.49641258, b: 0.5748172, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -1322,6 +1322,7 @@ GameObject:
   - component: {fileID: 483291225}
   - component: {fileID: 483291224}
   - component: {fileID: 483291226}
+  - component: {fileID: 483291227}
   m_Layer: 0
   m_Name: slime(1)
   m_TagString: enemy
@@ -1419,6 +1420,20 @@ MonoBehaviour:
   hp: {fileID: 0}
   ogHP: 0
   ogSP: 0
+--- !u!114 &483291227
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 483291223}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8ad59255229980f4d9f4fb8778c1cd7b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  enemy: {fileID: 483291226}
+  b: {fileID: 1426017184}
 --- !u!1 &534669902
 GameObject:
   m_ObjectHideFlags: 0
@@ -1512,6 +1527,7 @@ GameObject:
   - component: {fileID: 552826488}
   - component: {fileID: 552826487}
   - component: {fileID: 552826489}
+  - component: {fileID: 552826486}
   m_Layer: 0
   m_Name: slime (2)
   m_TagString: enemy
@@ -1519,6 +1535,20 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
+--- !u!114 &552826486
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 552826485}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8ad59255229980f4d9f4fb8778c1cd7b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  enemy: {fileID: 552826489}
+  b: {fileID: 1426017184}
 --- !u!212 &552826487
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -8758,7 +8788,7 @@ MonoBehaviour:
   HP: 200
   SP: 10
   def: 5
-  attack: 5
+  attack: 20
   speed: 10
   turn: 0
   sp: {fileID: 1211368022}
@@ -8777,6 +8807,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fb1ca158adffd2e46b25700b1927c480, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  sortedStats: []
   lists: {fileID: 227426922}
   stats: []
   atk: normal

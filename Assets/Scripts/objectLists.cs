@@ -5,10 +5,10 @@ using UnityEngine.UI;
 
 public class objectLists : MonoBehaviour
 {
-    public GameObject[] chars;
+    public List<GameObject> chars = new List<GameObject>();
     public List<Item> items = new List<Item>();
-    public GameObject[] enemies;
-    public GameObject[] buttons;
+    public List<GameObject> enemies = new List<GameObject>();
+    public List<GameObject> buttons = new List<GameObject>();
     public static objectLists instance;
     public delegate void OnItemChanged();
     public OnItemChanged onItemChangedCallback;
@@ -24,10 +24,20 @@ public class objectLists : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        enemies = GameObject.FindGameObjectsWithTag("enemy");
-        chars = GameObject.FindGameObjectsWithTag("Player");
+        foreach (GameObject charac in GameObject.FindGameObjectsWithTag("Player"))
+        {
+            chars.Add(charac);
+        }
+        foreach (GameObject enemy in GameObject.FindGameObjectsWithTag("enemy"))
+        {
+            enemies.Add(enemy);
+        }
+        foreach (GameObject button in GameObject.FindGameObjectsWithTag("button"))
+        {
+            buttons.Add(button);
+        }
+
         
-        buttons = GameObject.FindGameObjectsWithTag("button");
     }
 
     // Update is called once per frame

@@ -8,7 +8,7 @@ using UnityEngine.EventSystems;
 
 public class battleSystem : MonoBehaviour
 {
-
+    public List<baseStats> sortedStats;
     public objectLists lists;
     public List<baseStats> stats = new List<baseStats>();
     GameObject thatTarget;
@@ -44,11 +44,11 @@ public class battleSystem : MonoBehaviour
             slot.gameObject.GetComponentInChildren<Image>().enabled = false;
         }
 
-        for (int i = 0; i < lists.enemies.Length; i++)
+        for (int i = 0; i < lists.enemies.Count; i++)
         {
             stats.Add(lists.enemies[i].GetComponent<baseStats>());
         }
-        for (int i = 0; i < lists.chars.Length; i++)
+        for (int i = 0; i < lists.chars.Count; i++)
         {
             stats.Add(lists.chars[i].GetComponent<baseStats>());
         }
@@ -62,7 +62,10 @@ public class battleSystem : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+        if (lists.enemies.Count <= 0)
+        {
+            Debug.Log("pog");
+        }
         
 
 
@@ -109,7 +112,7 @@ public class battleSystem : MonoBehaviour
         
         if (atk == "normal")
         {
-            for (int i = 0; i < lists.enemies.Length; i++)
+            for (int i = 0; i < lists.enemies.Count; i++)
             {
                 lists.buttons[i].GetComponentInChildren<Text>().text = lists.enemies[i].name;
                 lists.buttons[i].GetComponent<Button>().interactable = true;
@@ -121,7 +124,7 @@ public class battleSystem : MonoBehaviour
             }
         } else if (atk == "special")
         {
-            for (int i = 0; i < lists.enemies.Length; i++)
+            for (int i = 0; i < lists.enemies.Count; i++)
             {
                 lists.buttons[i].GetComponentInChildren<Text>().text = lists.enemies[i].name;
                 lists.buttons[i].GetComponent<Button>().interactable = true;
@@ -142,6 +145,8 @@ public class battleSystem : MonoBehaviour
 
     public void TurnOrder()
     {
+        
+        
         itemsParent.gameObject.GetComponent<Image>().enabled = false;
         foreach (InventorySlot slot in slots)
         {
@@ -162,41 +167,46 @@ public class battleSystem : MonoBehaviour
             button.GetComponent<Button>().interactable = false;
 
         }
-       
+
         List<baseStats> sortedStats = stats.OrderBy(s => s.speed).ToList();
        
         sortedStats.Reverse();
        
         baseStats currentCharTurn = sortedStats[currentActor];
         // Take that turn
-        
-        if (currentCharTurn.gameObject.tag == "Player" && currentCharTurn.turn == false)
+        if (currentCharTurn == null)
         {
-            
+            stats.Remove(currentCharTurn);
+            Debug.Log("null");
+            TurnOrder();
+        }
+        else if (currentCharTurn.gameObject.tag == "Player" && currentCharTurn.turn == false)
+        {
+
             currentCharTurn.turn = true;
             attacker = currentCharTurn;
             foreach (InventorySlot slot in slots)
             {
                 slot.attacker = attacker;
-               
+
             }
             playerTurn();
         }
         else if (currentCharTurn.gameObject.tag == "enemy" && currentCharTurn.turn == false)
         {
-            
+
             currentCharTurn.turn = true;
-            int ran = Random.Range(0, lists.chars.Length);
+            int ran = Random.Range(0, lists.chars.Count);
             battleTarget = lists.chars[ran];
             attacker = currentCharTurn;
             foreach (InventorySlot slot in slots)
             {
                 slot.attacker = attacker;
-                
+
             }
             StartCoroutine(enemyAttack(battleTarget));
-            
-        }
+
+        } 
         currentActor++;
         if (currentActor > sortedStats.Count - 1)
         {
@@ -209,6 +219,7 @@ public class battleSystem : MonoBehaviour
     }
         void playerTurn()
         {
+        atk = "normal";
         itemsParent.gameObject.GetComponent<Image>().enabled = false;
         foreach (InventorySlot slot in slots)
         {
