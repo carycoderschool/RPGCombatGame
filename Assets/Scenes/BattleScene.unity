@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 170076734}
-  m_IndirectSpecularColor: {r: 0.44657874, g: 0.49641258, b: 0.5748172, a: 1}
+  m_IndirectSpecularColor: {r: 0.44657898, g: 0.4964133, b: 0.5748178, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -229,6 +229,10 @@ PrefabInstance:
       propertyPath: m_Pivot.y
       value: 0.5
       objectReference: {fileID: 0}
+    - target: {fileID: 180971908, guid: 5e36f4263d761974db03416a24737745, type: 3}
+      propertyPath: battle
+      value: 
+      objectReference: {fileID: 1426017184}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 5e36f4263d761974db03416a24737745, type: 3}
 --- !u!1 &41414478
@@ -722,6 +726,10 @@ PrefabInstance:
       propertyPath: m_Pivot.y
       value: 0.5
       objectReference: {fileID: 0}
+    - target: {fileID: 180971908, guid: 5e36f4263d761974db03416a24737745, type: 3}
+      propertyPath: battle
+      value: 
+      objectReference: {fileID: 1426017184}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 5e36f4263d761974db03416a24737745, type: 3}
 --- !u!1 &227426921
@@ -1051,6 +1059,10 @@ PrefabInstance:
       propertyPath: m_Pivot.y
       value: 0.5
       objectReference: {fileID: 0}
+    - target: {fileID: 180971908, guid: 5e36f4263d761974db03416a24737745, type: 3}
+      propertyPath: battle
+      value: 
+      objectReference: {fileID: 1426017184}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 5e36f4263d761974db03416a24737745, type: 3}
 --- !u!1001 &407874050
@@ -1170,6 +1182,10 @@ PrefabInstance:
       propertyPath: m_Pivot.y
       value: 0.5
       objectReference: {fileID: 0}
+    - target: {fileID: 180971908, guid: 5e36f4263d761974db03416a24737745, type: 3}
+      propertyPath: battle
+      value: 
+      objectReference: {fileID: 1426017184}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 5e36f4263d761974db03416a24737745, type: 3}
 --- !u!1001 &429340197
@@ -1289,6 +1305,10 @@ PrefabInstance:
       propertyPath: m_Pivot.y
       value: 0.5
       objectReference: {fileID: 0}
+    - target: {fileID: 180971908, guid: 5e36f4263d761974db03416a24737745, type: 3}
+      propertyPath: battle
+      value: 
+      objectReference: {fileID: 1426017184}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 5e36f4263d761974db03416a24737745, type: 3}
 --- !u!1 &483291223
@@ -1706,6 +1726,10 @@ PrefabInstance:
       propertyPath: m_Pivot.y
       value: 0.5
       objectReference: {fileID: 0}
+    - target: {fileID: 180971908, guid: 5e36f4263d761974db03416a24737745, type: 3}
+      propertyPath: battle
+      value: 
+      objectReference: {fileID: 1426017184}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 5e36f4263d761974db03416a24737745, type: 3}
 --- !u!1 &584881117
@@ -3331,7 +3355,7 @@ GameObject:
   - component: {fileID: 606715105}
   - component: {fileID: 606715107}
   m_Layer: 5
-  m_Name: Panel
+  m_Name: poo
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -3384,7 +3408,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 1, b: 1, a: 0.392}
+  m_Color: {r: 1, g: 1, b: 1, a: 0}
   m_RaycastTarget: 1
   m_OnCullStateChanged:
     m_PersistentCalls:
@@ -3549,6 +3573,10 @@ PrefabInstance:
       propertyPath: m_Pivot.y
       value: 0.5
       objectReference: {fileID: 0}
+    - target: {fileID: 180971908, guid: 5e36f4263d761974db03416a24737745, type: 3}
+      propertyPath: battle
+      value: 
+      objectReference: {fileID: 1426017184}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 5e36f4263d761974db03416a24737745, type: 3}
 --- !u!1 &705978186
@@ -7480,6 +7508,10 @@ PrefabInstance:
       propertyPath: m_Pivot.y
       value: 0.5
       objectReference: {fileID: 0}
+    - target: {fileID: 180971908, guid: 5e36f4263d761974db03416a24737745, type: 3}
+      propertyPath: battle
+      value: 
+      objectReference: {fileID: 1426017184}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 5e36f4263d761974db03416a24737745, type: 3}
 --- !u!1001 &917658968
@@ -7599,6 +7631,10 @@ PrefabInstance:
       propertyPath: m_Pivot.y
       value: 0.5
       objectReference: {fileID: 0}
+    - target: {fileID: 180971908, guid: 5e36f4263d761974db03416a24737745, type: 3}
+      propertyPath: battle
+      value: 
+      objectReference: {fileID: 1426017184}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 5e36f4263d761974db03416a24737745, type: 3}
 --- !u!1001 &949446262
@@ -7718,6 +7754,10 @@ PrefabInstance:
       propertyPath: m_Pivot.y
       value: 0.5
       objectReference: {fileID: 0}
+    - target: {fileID: 180971908, guid: 5e36f4263d761974db03416a24737745, type: 3}
+      propertyPath: battle
+      value: 
+      objectReference: {fileID: 1426017184}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 5e36f4263d761974db03416a24737745, type: 3}
 --- !u!224 &953751186 stripped
@@ -7915,6 +7955,10 @@ PrefabInstance:
       propertyPath: m_Pivot.y
       value: 0.5
       objectReference: {fileID: 0}
+    - target: {fileID: 180971908, guid: 5e36f4263d761974db03416a24737745, type: 3}
+      propertyPath: battle
+      value: 
+      objectReference: {fileID: 1426017184}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 5e36f4263d761974db03416a24737745, type: 3}
 --- !u!1 &1121032437
@@ -8373,6 +8417,10 @@ PrefabInstance:
       propertyPath: m_Pivot.y
       value: 0.5
       objectReference: {fileID: 0}
+    - target: {fileID: 180971908, guid: 5e36f4263d761974db03416a24737745, type: 3}
+      propertyPath: battle
+      value: 
+      objectReference: {fileID: 1426017184}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 5e36f4263d761974db03416a24737745, type: 3}
 --- !u!1 &1312813111
@@ -8733,6 +8781,12 @@ MonoBehaviour:
   stats: []
   atk: normal
   itemPrefab: {fileID: 11400000, guid: bc17bff9f49f25249843e0e047a5b00e, type: 2}
+  slots: []
+  slotSprites: []
+  itemsParent: {fileID: 259197721}
+  currentAction: 
+  BG: {fileID: 21300000, guid: ba414b1a138b1644abda28107ac7ce4e, type: 3}
+  buttonSpr: {fileID: 0}
 --- !u!114 &1426017185
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -8906,6 +8960,10 @@ PrefabInstance:
       propertyPath: m_Pivot.y
       value: 0.5
       objectReference: {fileID: 0}
+    - target: {fileID: 180971908, guid: 5e36f4263d761974db03416a24737745, type: 3}
+      propertyPath: battle
+      value: 
+      objectReference: {fileID: 1426017184}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 5e36f4263d761974db03416a24737745, type: 3}
 --- !u!1 &1541438886
@@ -9478,6 +9536,10 @@ PrefabInstance:
       propertyPath: m_Pivot.y
       value: 0.5
       objectReference: {fileID: 0}
+    - target: {fileID: 180971908, guid: 5e36f4263d761974db03416a24737745, type: 3}
+      propertyPath: battle
+      value: 
+      objectReference: {fileID: 1426017184}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 5e36f4263d761974db03416a24737745, type: 3}
 --- !u!224 &1896864689 stripped
@@ -9688,61 +9750,9 @@ PrefabInstance:
       propertyPath: m_Pivot.y
       value: 0.5
       objectReference: {fileID: 0}
-    - target: {fileID: 3125303832059136232, guid: 5e36f4263d761974db03416a24737745,
-        type: 3}
-      propertyPath: m_Colors.m_NormalColor.r
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 3125303832059136232, guid: 5e36f4263d761974db03416a24737745,
-        type: 3}
-      propertyPath: m_Colors.m_NormalColor.g
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 3125303832059136232, guid: 5e36f4263d761974db03416a24737745,
-        type: 3}
-      propertyPath: m_Colors.m_NormalColor.b
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 3125303832059136232, guid: 5e36f4263d761974db03416a24737745,
-        type: 3}
-      propertyPath: m_Colors.m_HighlightedColor.r
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 3125303832059136232, guid: 5e36f4263d761974db03416a24737745,
-        type: 3}
-      propertyPath: m_Colors.m_HighlightedColor.g
-      value: 0.4575472
-      objectReference: {fileID: 0}
-    - target: {fileID: 3125303832059136232, guid: 5e36f4263d761974db03416a24737745,
-        type: 3}
-      propertyPath: m_Colors.m_HighlightedColor.b
-      value: 0.4575472
-      objectReference: {fileID: 0}
-    - target: {fileID: 3125303832059136233, guid: 5e36f4263d761974db03416a24737745,
-        type: 3}
-      propertyPath: m_RaycastTarget
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 3125303832059136233, guid: 5e36f4263d761974db03416a24737745,
-        type: 3}
-      propertyPath: m_Color.r
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 3125303832059136233, guid: 5e36f4263d761974db03416a24737745,
-        type: 3}
-      propertyPath: m_Color.g
-      value: 0.23113209
-      objectReference: {fileID: 0}
-    - target: {fileID: 3125303832059136233, guid: 5e36f4263d761974db03416a24737745,
-        type: 3}
-      propertyPath: m_Color.b
-      value: 0.23113209
-      objectReference: {fileID: 0}
-    - target: {fileID: 3125303832116201532, guid: 5e36f4263d761974db03416a24737745,
-        type: 3}
-      propertyPath: m_Sprite
+    - target: {fileID: 180971908, guid: 5e36f4263d761974db03416a24737745, type: 3}
+      propertyPath: battle
       value: 
-      objectReference: {fileID: 21300010, guid: 3baae6c6c7a4b41429347dacd190c0d1,
-        type: 3}
+      objectReference: {fileID: 1426017184}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 5e36f4263d761974db03416a24737745, type: 3}

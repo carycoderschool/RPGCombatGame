@@ -7,14 +7,20 @@ public class InventorySlot : MonoBehaviour
 {
     public Image icon;
     public Button removeButton;
-    Item item;
+    public Item item;
+    public baseStats attacker;
+    public Color color;
+    public battleSystem battle;
     // Start is called before the first frame update
     public void FillSlot(Item newItem)
     {
         item = newItem;
 
         icon.sprite = item.icon;
-        icon.enabled = true;
+        
+        color = icon.color;
+        color.a = 255;
+        icon.color = color;
         removeButton.interactable = true;
     }
 
@@ -23,13 +29,21 @@ public class InventorySlot : MonoBehaviour
     {
         item = null;
         icon.enabled = false;
-        
-        
-        
+        color = icon.color;
+        color.a = 0;
+        icon.color = color;
         removeButton.interactable = false;
     }
     public void Remove()
     {
-        objectLists.instance.Remove(item);
+        objectLists.instance.Remove(item, battle);
+    }
+    public void UseItem()
+    {
+        if (item != null)
+        {
+            item.Use(attacker);
+            Remove();
+        }
     }
 }

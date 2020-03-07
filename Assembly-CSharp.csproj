@@ -71,31 +71,33 @@
     <Compile Include="Assets\2d-extras-2018.3\Assets\Tilemap\Tiles\Rule Tile\Scripts\RuleTile.cs" />
     <Compile Include="Assets\2d-extras-2018.3\Assets\Tilemap\Tiles\Terrain Tile\Scripts\TerrainTile.cs" />
     <Compile Include="Assets\2d-extras-2018.3\Assets\Tilemap\Tiles\Weighted Random Tile\WeightedRandomTile.cs" />
-    <Compile Include="Assets\baseHero.cs" />
-    <Compile Include="Assets\baseStats.cs" />
-    <Compile Include="Assets\battleSystem.cs" />
-    <Compile Include="Assets\InventorySlot.cs" />
-    <Compile Include="Assets\InventoryUI.cs" />
-    <Compile Include="Assets\Item.cs" />
-    <Compile Include="Assets\objectLists.cs" />
-    <Compile Include="Assets\playerStatUI.cs" />
-    <Compile Include="Assets\specialAttacksScript.cs" />
+    <Compile Include="Assets\Scripts\baseHero.cs" />
+    <Compile Include="Assets\Scripts\baseStats.cs" />
+    <Compile Include="Assets\Scripts\battleSystem.cs" />
+    <Compile Include="Assets\Scripts\InventorySlot.cs" />
+    <Compile Include="Assets\Scripts\InventoryUI.cs" />
+    <Compile Include="Assets\Scripts\Item.cs" />
+    <Compile Include="Assets\Scripts\ItemAction.cs" />
+    <Compile Include="Assets\Scripts\itemHeal.cs" />
+    <Compile Include="Assets\Scripts\objectLists.cs" />
+    <Compile Include="Assets\Scripts\playerStatUI.cs" />
+    <Compile Include="Assets\Scripts\specialAttacksScript.cs" />
     <None Include="Assets\2d-extras-2018.3\Assets\Tilemap\Tiles\Rule Tile\ScriptTemplates\NewCustomRuleTile.cs.txt" />
     <None Include="Assets\2d-extras-2018.3\Assets\Tilemap\Brushes\Tint Brush Smooth\Shaders\TintedTilemap.shader" />
     <Reference Include="Unity.TextMeshPro.Editor">
-      <HintPath>C:/Users/caryc/Desktop/Unity Github Projects Go Here/RPGCombatGame/Library/ScriptAssemblies/Unity.TextMeshPro.Editor.dll</HintPath>
+      <HintPath>C:/Users/Nicky DaGGs/Documents/GitHub/RPGCombatGame/Library/ScriptAssemblies/Unity.TextMeshPro.Editor.dll</HintPath>
     </Reference>
     <Reference Include="Unity.PackageManagerUI.Editor">
-      <HintPath>C:/Users/caryc/Desktop/Unity Github Projects Go Here/RPGCombatGame/Library/ScriptAssemblies/Unity.PackageManagerUI.Editor.dll</HintPath>
+      <HintPath>C:/Users/Nicky DaGGs/Documents/GitHub/RPGCombatGame/Library/ScriptAssemblies/Unity.PackageManagerUI.Editor.dll</HintPath>
     </Reference>
     <Reference Include="Unity.CollabProxy.Editor">
-      <HintPath>C:/Users/caryc/Desktop/Unity Github Projects Go Here/RPGCombatGame/Library/ScriptAssemblies/Unity.CollabProxy.Editor.dll</HintPath>
+      <HintPath>C:/Users/Nicky DaGGs/Documents/GitHub/RPGCombatGame/Library/ScriptAssemblies/Unity.CollabProxy.Editor.dll</HintPath>
     </Reference>
     <Reference Include="Unity.TextMeshPro">
-      <HintPath>C:/Users/caryc/Desktop/Unity Github Projects Go Here/RPGCombatGame/Library/ScriptAssemblies/Unity.TextMeshPro.dll</HintPath>
+      <HintPath>C:/Users/Nicky DaGGs/Documents/GitHub/RPGCombatGame/Library/ScriptAssemblies/Unity.TextMeshPro.dll</HintPath>
     </Reference>
     <Reference Include="Unity.Analytics.DataPrivacy">
-      <HintPath>C:/Users/caryc/Desktop/Unity Github Projects Go Here/RPGCombatGame/Library/ScriptAssemblies/Unity.Analytics.DataPrivacy.dll</HintPath>
+      <HintPath>C:/Users/Nicky DaGGs/Documents/GitHub/RPGCombatGame/Library/ScriptAssemblies/Unity.Analytics.DataPrivacy.dll</HintPath>
     </Reference>
     <Reference Include="UnityEngine.AIModule">
       <HintPath>C:/Program Files/Unity/Hub/Editor/2018.4.6f1/Editor/Data/Managed/UnityEngine/UnityEngine.AIModule.dll</HintPath>
@@ -299,13 +301,13 @@
       <HintPath>C:/Program Files/Unity/Hub/Editor/2018.4.6f1/Editor/Data/UnityExtensions/Unity/UnitySpatialTracking/RuntimeEditor/UnityEngine.SpatialTracking.dll</HintPath>
     </Reference>
     <Reference Include="Unity.Analytics.Editor">
-      <HintPath>C:/Users/caryc/Desktop/Unity Github Projects Go Here/RPGCombatGame/Library/PackageCache/com.unity.analytics@3.2.2/Unity.Analytics.Editor.dll</HintPath>
+      <HintPath>C:/Users/Nicky DaGGs/Documents/GitHub/RPGCombatGame/Library/PackageCache/com.unity.analytics@3.2.2/Unity.Analytics.Editor.dll</HintPath>
     </Reference>
     <Reference Include="Unity.Analytics.StandardEvents">
-      <HintPath>C:/Users/caryc/Desktop/Unity Github Projects Go Here/RPGCombatGame/Library/PackageCache/com.unity.analytics@3.2.2/Unity.Analytics.StandardEvents.dll</HintPath>
+      <HintPath>C:/Users/Nicky DaGGs/Documents/GitHub/RPGCombatGame/Library/PackageCache/com.unity.analytics@3.2.2/Unity.Analytics.StandardEvents.dll</HintPath>
     </Reference>
     <Reference Include="Unity.Analytics.Tracker">
-      <HintPath>C:/Users/caryc/Desktop/Unity Github Projects Go Here/RPGCombatGame/Library/PackageCache/com.unity.analytics@3.2.2/Unity.Analytics.Tracker.dll</HintPath>
+      <HintPath>C:/Users/Nicky DaGGs/Documents/GitHub/RPGCombatGame/Library/PackageCache/com.unity.analytics@3.2.2/Unity.Analytics.Tracker.dll</HintPath>
     </Reference>
     <Reference Include="netstandard">
       <HintPath>C:/Program Files/Unity/Hub/Editor/2018.4.6f1/Editor/Data/NetStandard/ref/2.0.0/netstandard.dll</HintPath>

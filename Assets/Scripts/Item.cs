@@ -7,6 +7,7 @@ public class Item : ScriptableObject
 {
     new public string name = "New Item";
     public Sprite icon = null;
+    public ItemAction action;
     // Start is called before the first frame update
     void Start()
     {
@@ -18,8 +19,8 @@ public class Item : ScriptableObject
     {
         
     }
-    public virtual void Use(baseStats player)
+    public virtual void Use(baseStats attacker)
     {
-        Debug.Log("poo");
+        action.Act(attacker);
     }
 }

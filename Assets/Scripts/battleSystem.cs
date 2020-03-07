@@ -8,6 +8,7 @@ using UnityEngine.EventSystems;
 
 public class battleSystem : MonoBehaviour
 {
+
     public objectLists lists;
     public List<baseStats> stats = new List<baseStats>();
     GameObject thatTarget;
@@ -18,12 +19,31 @@ public class battleSystem : MonoBehaviour
     public string atk = "normal";
     public delegate void SpecialDelegate(string name);
     public Item itemPrefab;
+    public InventorySlot[] slots;
+    public Image[] slotSprites;
+    public Transform itemsParent;
+    public string currentAction;
+    public Sprite BG;
+    public Sprite buttonSpr;
     // Start is called before the first frame update
     void Start()
     {
+        slots = itemsParent.GetComponentsInChildren<InventorySlot>();
+        slotSprites = itemsParent.GetComponentsInChildren<Image>();
         lists.AddItem(itemPrefab);
         lists.AddItem(itemPrefab);
         lists.AddItem(itemPrefab);
+        itemsParent.gameObject.GetComponent<Image>().enabled = false;
+        foreach (InventorySlot slot in slots)
+        {
+            slot.gameObject.GetComponentInChildren<Button>().interactable = false;
+            slot.removeButton.interactable = false;
+            slot.removeButton.gameObject.GetComponent<Image>().enabled = false;
+            slot.icon.enabled = false;
+            slot.color.a = 0;
+            slot.gameObject.GetComponentInChildren<Image>().enabled = false;
+        }
+
         for (int i = 0; i < lists.enemies.Length; i++)
         {
             stats.Add(lists.enemies[i].GetComponent<baseStats>());
@@ -42,13 +62,51 @@ public class battleSystem : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-
+        
+        
 
 
     }
-    
-    public void enemyChoose()
+    public void UseInventory()
     {
+        currentAction = "items";
+        itemsParent.gameObject.GetComponent<Image>().enabled = true;
+        foreach (InventorySlot slot in slots)
+        {
+            slot.gameObject.GetComponentInChildren<Button>().interactable = true;
+            
+            if (slot.item != null)
+            {
+                slot.removeButton.interactable = true;
+                slot.removeButton.gameObject.GetComponent<Image>().enabled = true;
+            } else
+            {
+                slot.removeButton.interactable = false;
+                slot.removeButton.gameObject.GetComponent<Image>().enabled = false;
+            }
+            slot.icon.enabled = true;
+            slot.color.a = 225;
+            slot.gameObject.GetComponentInChildren<Image>().enabled = true;
+        }
+        foreach (GameObject buttn in lists.buttons)
+        {
+            buttn.GetComponent<Button>().interactable = false;
+        }
+        lists.buttons[3].GetComponentInChildren<Text>().text = "Back";
+        lists.buttons[3].GetComponent<Button>().interactable = true;
+        lists.buttons[3].GetComponent<Button>().onClick.RemoveAllListeners();
+        lists.buttons[3].GetComponent<Button>().onClick.AddListener(Back);
+    }
+    public void enemyChoose(bool SA)
+    {
+        if (SA == true)
+        {
+            currentAction = "SAenemyChoose";
+        } else
+        {
+            currentAction = "enemyChoose";
+        }
+        
         if (atk == "normal")
         {
             for (int i = 0; i < lists.enemies.Length; i++)
@@ -82,9 +140,24 @@ public class battleSystem : MonoBehaviour
 
     }
 
-    void TurnOrder()
+    public void TurnOrder()
     {
-        foreach (GameObject button in lists.buttons)
+        itemsParent.gameObject.GetComponent<Image>().enabled = false;
+        foreach (InventorySlot slot in slots)
+        {
+            slot.gameObject.GetComponentInChildren<Button>().interactable = false;
+            slot.removeButton.interactable = false;
+            slot.removeButton.gameObject.GetComponent<Image>().enabled = false;
+            
+            slot.gameObject.GetComponentInChildren<Image>().enabled = false;
+            
+        }
+        foreach (InventorySlot slot in slots)
+        {
+            slot.icon.enabled = false;
+            slot.color.a = 0;
+        }
+            foreach (GameObject button in lists.buttons)
         {
             button.GetComponent<Button>().interactable = false;
 
@@ -102,6 +175,11 @@ public class battleSystem : MonoBehaviour
             
             currentCharTurn.turn = true;
             attacker = currentCharTurn;
+            foreach (InventorySlot slot in slots)
+            {
+                slot.attacker = attacker;
+               
+            }
             playerTurn();
         }
         else if (currentCharTurn.gameObject.tag == "enemy" && currentCharTurn.turn == false)
@@ -111,6 +189,11 @@ public class battleSystem : MonoBehaviour
             int ran = Random.Range(0, lists.chars.Length);
             battleTarget = lists.chars[ran];
             attacker = currentCharTurn;
+            foreach (InventorySlot slot in slots)
+            {
+                slot.attacker = attacker;
+                
+            }
             StartCoroutine(enemyAttack(battleTarget));
             
         }
@@ -126,22 +209,34 @@ public class battleSystem : MonoBehaviour
     }
         void playerTurn()
         {
+        itemsParent.gameObject.GetComponent<Image>().enabled = false;
+        foreach (InventorySlot slot in slots)
+        {
+            slot.gameObject.GetComponentInChildren<Button>().interactable = false;
+            slot.removeButton.interactable = false;
+            slot.removeButton.gameObject.GetComponent<Image>().enabled = false;
 
+            slot.gameObject.GetComponentInChildren<Image>().enabled = false;
 
-            foreach (GameObject button in lists.buttons)
+        }
+
+        foreach (GameObject button in lists.buttons)
             {
                 button.GetComponent<Button>().interactable = true;
             }
             lists.buttons[0].GetComponentInChildren<Text>().text = "Attack";
             lists.buttons[0].GetComponent<Button>().onClick.RemoveAllListeners();
-            lists.buttons[0].GetComponent<Button>().onClick.AddListener(enemyChoose);
+            lists.buttons[0].GetComponent<Button>().onClick.AddListener(() => enemyChoose(false));
             lists.buttons[0].GetComponent<Button>().Select();
-            lists.buttons[1].GetComponentInChildren<Text>().text = "Items";
-            lists.buttons[2].GetComponentInChildren<Text>().text = "Special Attacks";
+        lists.buttons[1].GetComponentInChildren<Text>().text = "Items";
+        lists.buttons[1].GetComponent<Button>().onClick.RemoveAllListeners();
+        lists.buttons[1].GetComponent<Button>().onClick.AddListener(UseInventory);
+        lists.buttons[2].GetComponent<Button>().onClick.RemoveAllListeners();
+        lists.buttons[2].GetComponentInChildren<Text>().text = "Special Attacks";
         lists.buttons[2].GetComponent<Button>().onClick.AddListener(spec);
         lists.buttons[3].GetComponentInChildren<Text>().text = "Run";
-
-        }
+        lists.buttons[3].GetComponent<Button>().onClick.RemoveAllListeners();
+    }
        
         IEnumerator enemyAttack(GameObject target)
         {
@@ -155,7 +250,16 @@ public class battleSystem : MonoBehaviour
         }
         void Back()
         {
-
+        if (currentAction == "enemyChoose" || currentAction == "SAChoose" || currentAction == "items")
+        {
+            playerTurn();
+        }
+        else if (currentAction == "SAPhysical" || currentAction == "SAStatus" || currentAction == "SAenemyChoose")
+        {
+            specialTypeChoose();
+        } 
+        
+            
         }
     void spec()
     {
@@ -180,16 +284,24 @@ public class battleSystem : MonoBehaviour
         }
     void specialTypeChoose()
     {
+        currentAction = "SAChoose";
         lists.buttons[0].GetComponentInChildren<Text>().text = "Physical";
         lists.buttons[0].GetComponent<Button>().onClick.RemoveAllListeners();
-        lists.buttons[0].GetComponent<Button>().onClick.AddListener(enemyChoose);
+        lists.buttons[0].GetComponent<Button>().onClick.AddListener(() => enemyChoose(true));
+        lists.buttons[0].GetComponent<Button>().interactable = true;
         lists.buttons[1].GetComponentInChildren<Text>().text = "Status";
         lists.buttons[1].GetComponent<Button>().onClick.RemoveAllListeners();
         lists.buttons[1].GetComponent<Button>().onClick.AddListener(StatusSpecialAttackChoose);
+        lists.buttons[1].GetComponent<Button>().interactable = true;
+        lists.buttons[2].GetComponent<Button>().interactable = false;
+        lists.buttons[3].GetComponentInChildren<Text>().text = "Back";
+        lists.buttons[3].GetComponent<Button>().interactable = true;
+        lists.buttons[3].GetComponent<Button>().onClick.RemoveAllListeners();
+        lists.buttons[3].GetComponent<Button>().onClick.AddListener(Back);
     }
     public void specialAttackChoose(GameObject enemy)
     {
-         
+        currentAction = "SAPhysical";
         
         lists.buttons[0].GetComponentInChildren<Text>().text = attacker.physicalName1;
 
@@ -226,7 +338,7 @@ public class battleSystem : MonoBehaviour
     }
     public void StatusSpecialAttackChoose()
     {
-
+        currentAction = "SAStatus";
 
         lists.buttons[0].GetComponentInChildren<Text>().text = attacker.statusName1;
 

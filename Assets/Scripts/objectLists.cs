@@ -12,6 +12,7 @@ public class objectLists : MonoBehaviour
     public static objectLists instance;
     public delegate void OnItemChanged();
     public OnItemChanged onItemChangedCallback;
+    //singleton
     void Awake()
     {
         if (instance != null)
@@ -36,8 +37,10 @@ public class objectLists : MonoBehaviour
         if (onItemChangedCallback != null)
             onItemChangedCallback.Invoke();
     }
-    public void Remove(Item item)
+    public void Remove(Item item, battleSystem battle)
     {
+        
+        battle.TurnOrder();
         items.Remove(item);
         if (onItemChangedCallback != null)
             onItemChangedCallback.Invoke();
