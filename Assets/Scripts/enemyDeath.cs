@@ -14,11 +14,16 @@ public class enemyDeath : MonoBehaviour
     }
 
     // Update is called once per frame
-    void Update()
+    public void Update()
     {
         if (enemy.HP <= 0)
         {
+            
+
+
             list.enemies.Remove(gameObject);
+            b.stats.Remove(gameObject.GetComponent<baseStats>());
+            b.sortedStats.Remove(gameObject.GetComponent<baseStats>());
             
             Destroy(gameObject);
         }

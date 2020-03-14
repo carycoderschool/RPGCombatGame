@@ -8,7 +8,7 @@ using UnityEngine.EventSystems;
 
 public class battleSystem : MonoBehaviour
 {
-    public List<baseStats> sortedStats;
+    
     public objectLists lists;
     public List<baseStats> stats = new List<baseStats>();
     GameObject thatTarget;
@@ -25,6 +25,7 @@ public class battleSystem : MonoBehaviour
     public string currentAction;
     public Sprite BG;
     public Sprite buttonSpr;
+    public List<baseStats> sortedStats;
     // Start is called before the first frame update
     void Start()
     {
@@ -56,16 +57,13 @@ public class battleSystem : MonoBehaviour
     }
     void Reset()
     {
-        // TurnOrder();  
+        TurnOrder();  
     }
 
     // Update is called once per frame
     void Update()
     {
-        if (lists.enemies.Count <= 0)
-        {
-            Debug.Log("pog");
-        }
+        
         
 
 
@@ -114,6 +112,7 @@ public class battleSystem : MonoBehaviour
         {
             for (int i = 0; i < lists.enemies.Count; i++)
             {
+                
                 lists.buttons[i].GetComponentInChildren<Text>().text = lists.enemies[i].name;
                 lists.buttons[i].GetComponent<Button>().interactable = true;
                 GameObject enemy = lists.enemies[i];
@@ -121,11 +120,13 @@ public class battleSystem : MonoBehaviour
                 lists.buttons[i].GetComponent<Button>().onClick.AddListener(() => Attack(enemy));
                 lists.buttons[i + 1].GetComponentInChildren<Text>().text = "";
                 lists.buttons[i + 1].GetComponent<Button>().interactable = false;
+                
             }
         } else if (atk == "special")
         {
             for (int i = 0; i < lists.enemies.Count; i++)
             {
+                
                 lists.buttons[i].GetComponentInChildren<Text>().text = lists.enemies[i].name;
                 lists.buttons[i].GetComponent<Button>().interactable = true;
                 GameObject enemy = lists.enemies[i];
@@ -135,7 +136,11 @@ public class battleSystem : MonoBehaviour
                 lists.buttons[i + 1].GetComponent<Button>().interactable = false;
             }
         }
-        
+        if (lists.enemies.Count < 2)
+        {
+            lists.buttons[2].GetComponentInChildren<Text>().text = "";
+            lists.buttons[2].GetComponent<Button>().interactable = false;
+        }
         lists.buttons[3].GetComponentInChildren<Text>().text = "Back";
         lists.buttons[3].GetComponent<Button>().interactable = true;
         lists.buttons[3].GetComponent<Button>().onClick.RemoveAllListeners();
@@ -168,17 +173,16 @@ public class battleSystem : MonoBehaviour
 
         }
 
-        List<baseStats> sortedStats = stats.OrderBy(s => s.speed).ToList();
+        sortedStats = stats.OrderBy(s => s.speed).ToList();
        
         sortedStats.Reverse();
-       
+        int size = sortedStats.Count;
         baseStats currentCharTurn = sortedStats[currentActor];
         // Take that turn
-        if (currentCharTurn == null)
+
+       if (lists.enemies.Count < 1)
         {
-            stats.Remove(currentCharTurn);
-            Debug.Log("null");
-            TurnOrder();
+            Debug.Log("win");
         }
         else if (currentCharTurn.gameObject.tag == "Player" && currentCharTurn.turn == false)
         {
@@ -190,6 +194,7 @@ public class battleSystem : MonoBehaviour
                 slot.attacker = attacker;
 
             }
+            Debug.Log("Turn:" + attacker.name);
             playerTurn();
         }
         else if (currentCharTurn.gameObject.tag == "enemy" && currentCharTurn.turn == false)
@@ -204,9 +209,24 @@ public class battleSystem : MonoBehaviour
                 slot.attacker = attacker;
 
             }
+            Debug.Log("Turn:" + attacker.name);
             StartCoroutine(enemyAttack(battleTarget));
 
-        } 
+        }
+       
+        if (size > sortedStats.Count)
+        {
+            sortedStats = stats.OrderBy(s => s.speed).ToList();
+
+            sortedStats.Reverse();
+            foreach (baseStats stat in sortedStats)
+            {
+                stat.turn = false;
+            }
+            currentActor = 0;
+            Reset();
+        }
+        
         currentActor++;
         if (currentActor > sortedStats.Count - 1)
         {
@@ -252,7 +272,10 @@ public class battleSystem : MonoBehaviour
         IEnumerator enemyAttack(GameObject target)
         {
             yield return new WaitForSeconds(2f);
-
+            if (attacker == null)
+        {
+            TurnOrder();
+        }
 
             damage = attacker.GetComponent<baseStats>().attack - target.GetComponent<baseStats>().def;
             target.GetComponent<baseStats>().HP -= damage;
@@ -289,10 +312,11 @@ public class battleSystem : MonoBehaviour
         }
         damage = attacker.attack - enemy.GetComponent<baseStats>().def;
             enemy.GetComponent<baseStats>().HP -= damage;
-            TurnOrder();
+        TurnOrder();
 
 
-        }
+
+    }
     void specialTypeChoose()
     {
         currentAction = "SAChoose";
