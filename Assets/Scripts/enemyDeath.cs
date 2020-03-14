@@ -28,4 +28,10 @@ public class enemyDeath : MonoBehaviour
             Destroy(gameObject);
         }
     }
+    public void AttackSlash()
+    {
+       Vector3  babb = b.battleTarget.transform.position;
+        GameObject slash = Instantiate(b.slashPrefab);
+        slash.transform.position = b.battleTarget.transform.position;
+    }
 }

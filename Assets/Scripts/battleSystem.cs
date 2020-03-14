@@ -12,7 +12,7 @@ public class battleSystem : MonoBehaviour
     public objectLists lists;
     public List<baseStats> stats = new List<baseStats>();
     GameObject thatTarget;
-    GameObject battleTarget;
+    public GameObject battleTarget;
     baseStats attacker;
     float damage;
     int currentActor = 0;
@@ -26,6 +26,8 @@ public class battleSystem : MonoBehaviour
     public Sprite BG;
     public Sprite buttonSpr;
     public List<baseStats> sortedStats;
+    public GameObject slashPrefab;
+    
     // Start is called before the first frame update
     void Start()
     {
@@ -279,8 +281,10 @@ public class battleSystem : MonoBehaviour
 
             damage = attacker.GetComponent<baseStats>().attack - target.GetComponent<baseStats>().def;
             target.GetComponent<baseStats>().HP -= damage;
-            yield return new WaitForSeconds(2f);
-            TurnOrder();
+        attacker.gameObject.GetComponent<Animator>().SetBool("enemyAttacks", true);
+            yield return new WaitForSeconds(1f);
+        attacker.gameObject.GetComponent<Animator>().SetBool("enemyAttacks", false);
+        TurnOrder();
         }
         void Back()
         {
