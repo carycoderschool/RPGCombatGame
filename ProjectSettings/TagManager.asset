@@ -50,3 +50,6 @@ TagManager:
   - name: decor
     uniqueID: 1383508973
     locked: 0
+  - name: AttackEffect
+    uniqueID: 3237342191
+    locked: 0

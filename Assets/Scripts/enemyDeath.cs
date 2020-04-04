@@ -16,15 +16,20 @@ public class enemyDeath : MonoBehaviour
     // Update is called once per frame
     public void Update()
     {
+        StartCoroutine(Die());
+    }
+    IEnumerator Die()
+    {
+        
         if (enemy.HP <= 0)
         {
-            
+            yield return new WaitForSeconds(2f);
 
 
             list.enemies.Remove(gameObject);
             b.stats.Remove(gameObject.GetComponent<baseStats>());
             b.sortedStats.Remove(gameObject.GetComponent<baseStats>());
-            
+
             Destroy(gameObject);
         }
     }

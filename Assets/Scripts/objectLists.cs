@@ -26,14 +26,23 @@ public class objectLists : MonoBehaviour
     {
         foreach (GameObject charac in GameObject.FindGameObjectsWithTag("Player"))
         {
-            chars.Add(charac);
+            if (charac.GetComponent<baseStats>().character != null)
+            {
+                chars.Add(charac);
+            }
+            
         }
         foreach (GameObject enemy in GameObject.FindGameObjectsWithTag("enemy"))
         {
-            enemies.Add(enemy);
+            if (enemy.GetComponent<baseStats>().character != null)
+            {
+                enemies.Add(enemy);
+            }
+            
         }
         foreach (GameObject button in GameObject.FindGameObjectsWithTag("button"))
         {
+            
             buttons.Add(button);
         }
 
