@@ -1,0 +1,27 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2771c26e81d14744bbe87ccdf6f93c57, type: 3}
+  m_Name: SlimeSA
+  m_EditorClassIdentifier: 
+  physicalName1: 'Headbutt '
+  physicalName2: 
+  physicalName3: 
+  statusName1: 
+  statusName2: 
+  statusName3: 
+  SAPrefab1: {fileID: 755537041379064461, guid: 25221c206ca24c34f9fcd794fe088822,
+    type: 3}
+  SAPrefab2: {fileID: 0}
+  SAPrefab3: {fileID: 0}
+  SAPrefab4: {fileID: 0}
+  SAPrefab5: {fileID: 0}
+  SAPrefab6: {fileID: 0}

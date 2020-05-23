@@ -11,6 +11,7 @@ public class InventorySlot : MonoBehaviour
     public baseStats attacker;
     public Color color;
     public battleSystem battle;
+    public bool used = false;
     // Start is called before the first frame update
     public void FillSlot(Item newItem)
     {
@@ -38,12 +39,40 @@ public class InventorySlot : MonoBehaviour
     {
         objectLists.instance.Remove(item, battle);
     }
-    public void UseItem()
+    public IEnumerator UseItem()
     {
         if (item != null)
         {
             item.Use(attacker);
+            battle.battleText.text = battle.attacker.gameObject.name + " uses the " + item.name;
+            battle.itemsParent.gameObject.GetComponent<Image>().enabled = false;
+            foreach (InventorySlot slot in battle.slots)
+            {
+                slot.gameObject.GetComponentInChildren<Button>().interactable = false;
+                slot.removeButton.interactable = false;
+                slot.removeButton.gameObject.GetComponent<Image>().enabled = false;
+
+                slot.gameObject.GetComponentInChildren<Image>().enabled = false;
+
+            }
+            foreach (InventorySlot slot in battle.slots)
+            {
+                slot.icon.enabled = false;
+                slot.color.a = 0;
+            }
+            foreach (GameObject button in battle.lists.buttons)
+            {
+                button.GetComponent<Button>().interactable = false;
+
+            }
+            used = true;
             Remove();
+            yield return new WaitForSeconds(2f);
+            battle.TurnOrder();
         }
+    }
+    public void UseItemm()
+    {
+        StartCoroutine(UseItem());
     }
 }

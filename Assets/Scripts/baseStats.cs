@@ -6,13 +6,15 @@ using UnityEngine.UI;
 
 public class baseStats : MonoBehaviour
 {
-
+    public float importance;
+    public GameObject slash;
     public float buff;
     public stats character;
     public Text sp;
     public Text hp;
     public battleSystem b;
     public GameObject damageText;
+    public string nameChar;
     public string status;
     public bool buffed = false;
     public string buffedStat;
@@ -24,10 +26,13 @@ public class baseStats : MonoBehaviour
     public float attack;
     public float speed;
      public bool turn;
+    public bool revive1;
+    public bool revive2;
+    public bool revive3;
     [HideInInspector] public float ogHP;
     [HideInInspector] public float ogSP;
      public bool skip = false;
-
+    public stats state;
 
     // Start is called before the first frame update
     void Start()
@@ -35,15 +40,19 @@ public class baseStats : MonoBehaviour
        
         if (character != null)
         {
+            nameChar = character.nameChar;
             gameObject.GetComponent<SpriteRenderer>().sprite = character.icon;
             HP = character.HP;
             SP = character.SP;
             def = character.def;
             attack = character.attack;
             speed = character.speed;
-            ogHP = HP;
-            ogSP = SP;
-        }
+            ogHP = character.ogHP;
+            ogSP = character.ogSP;
+            revive1 = character.spec.revive1;
+            revive2 = character.spec.revive2;
+            revive3 = character.spec.revive3;
+}
         
     }
 
@@ -62,11 +71,40 @@ public class baseStats : MonoBehaviour
         
 
     }
+    private void Update()
+    {
+        if (SP < 0)
+        {
+            SP = 0;
+        }
+        UpdateCurrentState();
+    }
     public void AttackSlash1()
     {
         Vector3 babb = b.battleTarget.transform.position;
-        GameObject slash = Instantiate(b.slashPrefab);
-        slash.transform.position = b.battleTarget.transform.position;
+        GameObject sslash = Instantiate(slash);
+        sslash.transform.position = b.battleTarget.transform.position;
     }
-
+    public IEnumerator AnimationWait()
+    {
+        yield return new WaitForSeconds(2f);
+        gameObject.GetComponent<Animator>().SetBool("attack", false);
+    }
+    void UpdateCurrentState()
+    {
+        if (character != null)
+        {
+            state.nameChar = nameChar;
+            state.HP = HP;
+            state.SP = SP;
+            state.attack = attack;
+            state.def = def;
+            state.speed = speed;
+            state.ogHP = ogHP;
+            state.ogSP = ogSP;
+            state.spec = character.spec;
+            state.icon = character.icon;
+        }
+        
+    }
 }

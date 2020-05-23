@@ -32,8 +32,14 @@ public class DamageTextEffect : MonoBehaviour
         }
         
     }
-    public void StartFloating()
+    public void DamageStartFloating()
     {
+        text = Color.red;
+        text.a = 255;
+    }
+    public void HealStartFloating()
+    {
+        text = Color.green;
         text.a = 255;
     }
 }

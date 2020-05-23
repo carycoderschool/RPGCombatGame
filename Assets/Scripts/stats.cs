@@ -4,10 +4,13 @@ using UnityEngine;
 [CreateAssetMenu(fileName = "New Char", menuName = "Character")]
 public class stats : ScriptableObject
 {
+    public string nameChar;
     public specialAttacksScript spec;
     public Sprite icon;
     public float HP;
     public float SP;
+    public float ogHP;
+    public float ogSP;
     public float def;
     public float attack;
     public float speed;

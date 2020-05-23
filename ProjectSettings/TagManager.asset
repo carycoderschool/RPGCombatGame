@@ -7,6 +7,11 @@ TagManager:
   - enemy
   - button
   - item
+  - Chest
+  - party
+  - NPC
+  - Overworld Player
+  - wall
   layers:
   - Default
   - TransparentFX
@@ -52,4 +57,7 @@ TagManager:
     locked: 0
   - name: AttackEffect
     uniqueID: 3237342191
+    locked: 0
+  - name: Chest
+    uniqueID: 3133790901
     locked: 0

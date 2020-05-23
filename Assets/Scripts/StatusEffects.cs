@@ -23,7 +23,7 @@ public class StatusEffects : MonoBehaviour
         if (target.status == "Poison")
         {
             
-            Poison(target);
+            Poison(target, battle);
         } else if (target.status == "Sleep")
         {
             Sleep(target, battle);
@@ -76,66 +76,22 @@ public class StatusEffects : MonoBehaviour
             
         }
     }
-    public static void Poison(baseStats target)
+    public static void Poison(baseStats target, battleSystem bat)
     {
-        
-        if (target.statusDuration > 0)
+        target.StartCoroutine(poison());
+        IEnumerator poison()
         {
-            target.gameObject.GetComponent<SpriteRenderer>().color = new Color32(143, 0, 254, 255);
-            float damage = Mathf.Round(target.HP * 0.05f);
-            target.HP -= damage;
-            target.statusDuration -= 1;
-        } else
-        {
-            target.status = null;
-        }
-    }
-    public static void Sleep(baseStats target, battleSystem bat)
-    {
-        if (target.statusDuration > 0)
-        {
-            target.gameObject.GetComponent<SpriteRenderer>().color = Color.gray;
-            bat.StartCoroutine(bat.sleep());
-            target.statusDuration -= 1;
-        }
-        else
-        {
-            target.status = null;
-        }
-    }
-    public static void BuffDebuff(baseStats target, float buffedStat)
-    {
-            target.buffDuration -= 1;
-    }
-    public static void Confuse(baseStats target, battleSystem bat, MonoBehaviour poo)
-    {
-        if (target.statusDuration > 0)
-        {
-            int ran1 = Random.Range(0, 3);
-            if (ran1 > 0)
+            if (target.statusDuration > 0)
             {
-           
-                if (target.gameObject.tag == "enemy")
-                {
-                    bat.attacker = target;
-                    int ran = Random.Range(0, bat.lists.enemies.Count);
-                    bat.battleTarget = bat.lists.enemies[ran];
-                    
-                }
-                else if (target.gameObject.tag == "Player")
-                {
-                    bat.attacker = target;
-                    int ran = Random.Range(0, bat.lists.chars.Count);
-                    bat.battleTarget = bat.lists.chars[ran];
-                    
-                }
-                bat.damage = Mathf.Round(bat.attacker.ogHP * 0.1f);
-                Debug.Log(bat.damage);
-                poo.StartCoroutine(Wait(target, bat));
-                
-
-            } else if (ran1 < 1) 
-            {
+                target.gameObject.GetComponent<SpriteRenderer>().color = new Color32(143, 0, 254, 255);
+                float damage = Mathf.Round(target.ogHP * 0.05f);
+                yield return new WaitForSeconds(1f);
+                bat.battleText.text = target.nameChar + " is hurt by poison.";
+                target.HP -= damage;
+                target.damageText.GetComponent<Text>().text = damage.ToString();
+                target.damageText.GetComponent<DamageTextEffect>().DamageStartFloating();
+                target.statusDuration -= 1;
+                yield return new WaitForSeconds(1f);
                 if (target.gameObject.tag == "enemy")
                 {
                     target.turn = true;
@@ -161,126 +117,286 @@ public class StatusEffects : MonoBehaviour
                     }
                     bat.playerTurn();
                 }
-            } 
-            target.statusDuration -= 1;
-        }
-        else
-        {
-            if (target.gameObject.tag == "Player")
+            }
+            else
             {
-                target.turn = true;
-                bat.attacker = target;
-                foreach (InventorySlot slot in bat.slots)
-                {
-                    slot.attacker = bat.attacker;
-
-                }
-                Debug.Log("Turn:" + bat.attacker.name);
-                bat.playerTurn();
+                target.gameObject.GetComponent<SpriteRenderer>().color = Color.white;
+                bat.battleText.text = target.nameChar + " is cured of poison.";
                 target.status = null;
-            } else if (target.gameObject.tag == "enemy")
-            {
-                target.turn = true;
-                int ran = Random.Range(0, bat.lists.chars.Count);
-                bat.battleTarget = bat.lists.chars[ran];
-                bat.attacker = target;
-                foreach (InventorySlot slot in bat.slots)
+                yield return new WaitForSeconds(1f);
+                if (target.gameObject.tag == "enemy")
                 {
-                    slot.attacker = bat.attacker;
+                    target.turn = true;
+                    int ran = Random.Range(0, bat.lists.chars.Count);
+                    bat.battleTarget = bat.lists.chars[ran];
+                    bat.attacker = target;
+                    foreach (InventorySlot slot in bat.slots)
+                    {
+                        slot.attacker = bat.attacker;
 
+                    }
+
+                    bat.StartCoroutine(bat.enemyAttack(bat.battleTarget));
                 }
-                target.status = null;
+                else if (target.gameObject.tag == "Player")
+                {
+                    target.turn = true;
+                    bat.attacker = target;
+                    foreach (InventorySlot slot in bat.slots)
+                    {
+                        slot.attacker = bat.attacker;
 
-                bat.StartCoroutine(bat.enemyAttack(bat.battleTarget));
+                    }
+                    bat.playerTurn();
+                }
             }
             
         }
-        IEnumerator Wait(baseStats targett, battleSystem batt)
+        
+    }
+    public static void Sleep(baseStats target, battleSystem bat)
+    {
+        bat.StartCoroutine(sleep());
+         IEnumerator sleep()
         {
-            yield return new WaitForSeconds(2f);
-            targett.AttackSlash1();
-            yield return new WaitForSeconds(1f);
-            targett.GetComponent<baseStats>().HP -= batt.damage;
-            targett.GetComponent<baseStats>().damageText.gameObject.GetComponent<Text>().text = batt.damage.ToString();
-            targett.GetComponent<baseStats>().damageText.gameObject.GetComponent<DamageTextEffect>().StartFloating();
-            batt.StartCoroutine(batt.sleep());
+            if (target.statusDuration > 0)
+            {
+                bat.battleText.text = target.nameChar + " is sleeping...";
+                target.gameObject.GetComponent<SpriteRenderer>().color = Color.gray;
+                bat.StartCoroutine(bat.sleep());
+                target.statusDuration -= 1;
+            }
+            else
+            {
+                bat.battleText.text = target.nameChar + " woke up!";
+                target.gameObject.GetComponent<SpriteRenderer>().color = Color.white;
+                target.status = null;
+                yield return new WaitForSeconds(1f);
+                if (target.gameObject.tag == "enemy")
+                {
+                    target.turn = true;
+                    int ran = Random.Range(0, bat.lists.chars.Count);
+                    bat.battleTarget = bat.lists.chars[ran];
+                    bat.attacker = target;
+                    foreach (InventorySlot slot in bat.slots)
+                    {
+                        slot.attacker = bat.attacker;
+
+                    }
+
+                    bat.StartCoroutine(bat.enemyAttack(bat.battleTarget));
+                }
+                else if (target.gameObject.tag == "Player")
+                {
+                    target.turn = true;
+                    bat.attacker = target;
+                    foreach (InventorySlot slot in bat.slots)
+                    {
+                        slot.attacker = bat.attacker;
+
+                    }
+                    bat.playerTurn();
+                }
+            }
+        }
+        
+    }
+    public static void BuffDebuff(baseStats target, float buffedStat)
+    {
+            target.buffDuration -= 1;
+    }
+    public static void Confuse(baseStats target, battleSystem bat, MonoBehaviour poo)
+    {
+        bat.StartCoroutine(confuse());
+        IEnumerator confuse()
+        {
+            if (target.statusDuration > 0)
+            {
+                bat.battleText.text = target.nameChar + " is confused!";
+                yield return new WaitForSeconds(2f);
+                int ran1 = Random.Range(0, 3);
+                if (ran1 > 0)
+                {
+
+                    if (target.gameObject.tag == "enemy")
+                    {
+                        bat.attacker = target;
+                        int ran = Random.Range(0, bat.lists.enemies.Count);
+                        bat.battleTarget = bat.lists.enemies[ran];
+
+                    }
+                    else if (target.gameObject.tag == "Player")
+                    {
+                        bat.attacker = target;
+                        int ran = Random.Range(0, bat.lists.chars.Count);
+                        bat.battleTarget = bat.lists.chars[ran];
+
+                    }
+                    bat.damage = Mathf.Round(bat.attacker.ogHP * 0.1f);
+
+                    
+                    yield return new WaitForSeconds(2f);
+                    bat.battleText.text = target.gameObject.name + " harms their own party!";
+                    target.AttackSlash1();
+                    yield return new WaitForSeconds(1f);
+                    target.GetComponent<baseStats>().HP -= bat.damage;
+                    target.GetComponent<baseStats>().damageText.gameObject.GetComponent<Text>().text = bat.damage.ToString();
+                    target.GetComponent<baseStats>().damageText.gameObject.GetComponent<DamageTextEffect>().DamageStartFloating();
+                    bat.StartCoroutine(bat.sleep());
+
+
+                }
+                else if (ran1 < 1)
+                {
+                    if (target.gameObject.tag == "enemy")
+                    {
+                        target.turn = true;
+                        int ran = Random.Range(0, bat.lists.chars.Count);
+                        bat.battleTarget = bat.lists.chars[ran];
+                        bat.attacker = target;
+                        foreach (InventorySlot slot in bat.slots)
+                        {
+                            slot.attacker = bat.attacker;
+
+                        }
+
+                        bat.StartCoroutine(bat.enemyAttack(bat.battleTarget));
+                    }
+                    else if (target.gameObject.tag == "Player")
+                    {
+                        target.turn = true;
+                        bat.attacker = target;
+                        foreach (InventorySlot slot in bat.slots)
+                        {
+                            slot.attacker = bat.attacker;
+
+                        }
+                        bat.playerTurn();
+                    }
+                }
+                target.statusDuration -= 1;
+            }
+            else
+            {
+                target.gameObject.GetComponent<SpriteRenderer>().color = Color.white;
+                bat.battleText.text = target.nameChar + " regained consciousness.";
+                target.status = null;
+                yield return new WaitForSeconds(1f);
+                if (target.gameObject.tag == "Player")
+                {
+                    target.turn = true;
+                    bat.attacker = target;
+                    foreach (InventorySlot slot in bat.slots)
+                    {
+                        slot.attacker = bat.attacker;
+
+                    }
+                    Debug.Log("Turn:" + bat.attacker.name);
+                    bat.playerTurn();
+                    
+                }
+                else if (target.gameObject.tag == "enemy")
+                {
+                    target.turn = true;
+                    int ran = Random.Range(0, bat.lists.chars.Count);
+                    bat.battleTarget = bat.lists.chars[ran];
+                    bat.attacker = target;
+                    foreach (InventorySlot slot in bat.slots)
+                    {
+                        slot.attacker = bat.attacker;
+
+                    }
+                    
+
+                    bat.StartCoroutine(bat.enemyAttack(bat.battleTarget));
+                }
+
+            }
+            
         }
 
 
     }
     public static void Depression(baseStats target, battleSystem bat, MonoBehaviour baat)
     {
-        if (target.statusDuration > 0)
+        baat.StartCoroutine(Depressed());
+        IEnumerator Depressed()
         {
-            if (target.gameObject.tag == "enemy")
+            
+            if (target.statusDuration > 0)
             {
-                target.turn = true;
-                int ran = Random.Range(0, bat.lists.chars.Count);
-                bat.battleTarget = bat.lists.chars[ran];
-                bat.attacker = target;
-                foreach (InventorySlot slot in bat.slots)
+                if (target.gameObject.tag == "enemy")
                 {
-                    slot.attacker = bat.attacker;
+                    target.turn = true;
+                    int ran = Random.Range(0, bat.lists.chars.Count);
+                    bat.battleTarget = bat.lists.chars[ran];
+                    bat.attacker = target;
+                    foreach (InventorySlot slot in bat.slots)
+                    {
+                        slot.attacker = bat.attacker;
+
+                    }
+                    bat.damage = target.attack * .25f;
+                    target.gameObject.GetComponent<Animator>().SetBool("attack", true);
+                    
+                }
+                else if (target.gameObject.tag == "Player")
+                {
+                    target.turn = true;
+                    int ran = Random.Range(0, bat.lists.enemies.Count);
+                    bat.battleTarget = bat.lists.enemies[ran];
+                    foreach (InventorySlot slot in bat.slots)
+                    {
+                        slot.attacker = bat.attacker;
+
+                    }
+                    bat.damage = Mathf.Round(target.attack * .25f);
+                    target.gameObject.GetComponent<Animator>().SetBool("attack", true);
+                    
+                }
+                target.statusDuration -= 1;
+                bat.battleText.text = target.nameChar + " attacks weakly.";
+                yield return new WaitForSeconds(2f);
+                target.gameObject.GetComponent<Animator>().SetBool("attack", false);
+                target.GetComponent<baseStats>().HP -= bat.damage;
+                target.GetComponent<baseStats>().damageText.gameObject.GetComponent<Text>().text = bat.damage.ToString();
+                target.GetComponent<baseStats>().damageText.gameObject.GetComponent<DamageTextEffect>().DamageStartFloating();
+                bat.StartCoroutine(bat.sleep());
+            } else
+             {
+                bat.battleText.text = target.nameChar + " feels fine again.";
+                yield return new WaitForSeconds(2f);
+                if (target.gameObject.tag == "Player")
+                {
+                    target.turn = true;
+                    bat.attacker = target;
+                    foreach (InventorySlot slot in bat.slots)
+                    {
+                        slot.attacker = bat.attacker;
+
+                    }
+                    Debug.Log("Turn:" + bat.attacker.name);
+                    bat.playerTurn();
 
                 }
-                bat.damage = target.attack * .25f;
-                target.gameObject.GetComponent<Animator>().SetBool("enemyAttacks", true);
-                baat.StartCoroutine(Wait(bat.battleTarget.GetComponent<baseStats>(), bat));
-            } else if (target.gameObject.tag == "Player")
-            {
-                target.turn = true;
-                int ran = Random.Range(0, bat.lists.enemies.Count);
-                bat.battleTarget = bat.lists.enemies[ran];
-                foreach (InventorySlot slot in bat.slots)
+                else if (target.gameObject.tag == "enemy")
                 {
-                    slot.attacker = bat.attacker;
+                    target.turn = true;
+                    int ran = Random.Range(0, bat.lists.chars.Count);
+                    bat.battleTarget = bat.lists.chars[ran];
+                    bat.attacker = target;
+                    foreach (InventorySlot slot in bat.slots)
+                    {
+                        slot.attacker = bat.attacker;
 
+                    }
+
+
+                    bat.StartCoroutine(bat.enemyAttack(bat.battleTarget));
                 }
-                bat.damage = target.attack * .25f;
-                target.gameObject.GetComponent<Animator>().SetBool("attack", true);
-                baat.StartCoroutine(Wait(bat.battleTarget.GetComponent<baseStats>(), bat));
-            }
-            target.statusDuration -= 1;
-
-        } else
-        {
-            if (target.gameObject.tag == "Player")
-            {
-                target.turn = true;
-                bat.attacker = target;
-                foreach (InventorySlot slot in bat.slots)
-                {
-                    slot.attacker = bat.attacker;
-
-                }
-                Debug.Log("Turn:" + bat.attacker.name);
-                bat.playerTurn();
                 
+                target.status = null;
             }
-            else if (target.gameObject.tag == "enemy")
-            {
-                target.turn = true;
-                int ran = Random.Range(0, bat.lists.chars.Count);
-                bat.battleTarget = bat.lists.chars[ran];
-                bat.attacker = target;
-                foreach (InventorySlot slot in bat.slots)
-                {
-                    slot.attacker = bat.attacker;
-
-                }
-                
-
-                bat.StartCoroutine(bat.enemyAttack(bat.battleTarget));
-            }
-            target.status = null;
-        }
-        IEnumerator Wait(baseStats targett, battleSystem batt)
-        {
-            yield return new WaitForSeconds(2f);
-            targett.GetComponent<baseStats>().HP -= batt.damage;
-            targett.GetComponent<baseStats>().damageText.gameObject.GetComponent<Text>().text = batt.damage.ToString();
-            targett.GetComponent<baseStats>().damageText.gameObject.GetComponent<DamageTextEffect>().StartFloating();
-            batt.StartCoroutine(batt.sleep());
         }
     }
     

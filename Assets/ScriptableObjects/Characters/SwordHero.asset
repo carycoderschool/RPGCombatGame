@@ -12,10 +12,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 138a64d93a546564896fd3a44c68e5ff, type: 3}
   m_Name: SwordHero
   m_EditorClassIdentifier: 
+  nameChar: Slice Boy
   spec: {fileID: 11400000, guid: 2d9142f37fae09e449749f831cbe03a1, type: 2}
   icon: {fileID: 21300372, guid: c58b96e67390e2546997d06b2151a0dd, type: 3}
   HP: 180
   SP: 7
-  def: 3
+  ogHP: 180
+  ogSP: 7
+  def: 10
   attack: 20
-  speed: 7
+  speed: 4
