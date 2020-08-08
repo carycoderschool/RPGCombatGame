@@ -12,13 +12,18 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 138a64d93a546564896fd3a44c68e5ff, type: 3}
   m_Name: state1
   m_EditorClassIdentifier: 
-  nameChar: Hero
+  nameChar: godo
   spec: {fileID: 11400000, guid: 8154d0f55eb7ad74a9e8348526c10259, type: 2}
   icon: {fileID: 21300686, guid: c58b96e67390e2546997d06b2151a0dd, type: 3}
-  HP: 200
-  SP: 10
-  ogHP: 200
-  ogSP: 10
-  def: 10
-  attack: 20
-  speed: 5
+  HP: 220
+  SP: 18
+  ogHP: 220
+  ogSP: 18
+  def: 20
+  attack: 70
+  speed: 15
+  experience: 0
+  level: 5
+  nextExp: 10
+  defeatExp: 0
+  anim: {fileID: 0}

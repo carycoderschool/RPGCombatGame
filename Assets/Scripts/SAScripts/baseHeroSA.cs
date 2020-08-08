@@ -32,7 +32,7 @@ public class baseHeroSA : specialAttacksScript
                 attacker.b.battleTarget = target.gameObject;
                 attacker.slash = SAPrefab1;
                 attacker.SP -= 3;
-                float upAttack = attacker.attack *= 2;
+                float upAttack = attacker.attack * 2;
                 float damage = upAttack - target.def;
                 attacker.b.battleText.text = attacker.name + " uses " + name;
                 attacker.gameObject.GetComponent<Animator>().SetBool("attack", true);
@@ -42,6 +42,10 @@ public class baseHeroSA : specialAttacksScript
                 yield return new WaitForSeconds(1f);
 
                 target.HP -= damage;
+                if (damage < 1)
+                {
+                    damage = 1;
+                }
                 target.damageText.GetComponent<Text>().text = damage.ToString();
                 target.damageText.GetComponent<DamageTextEffect>().DamageStartFloating();
                 if (target.GetComponent<baseStats>().HP < 1)
@@ -84,7 +88,7 @@ public class baseHeroSA : specialAttacksScript
                 attacker.b.battleTarget = target.gameObject;
                 target.slash = SAPrefab4;
                 attacker.SP -= 3;
-                float heal = 20;
+                float heal = target.ogHP * .1f;
                 heal = Mathf.Round(heal);
                 target.HP += heal;
                 if (target.HP > target.ogHP)

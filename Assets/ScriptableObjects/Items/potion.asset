@@ -15,3 +15,5 @@ MonoBehaviour:
   name: Potion
   icon: {fileID: 21300002, guid: 3baae6c6c7a4b41429347dacd190c0d1, type: 3}
   action: {fileID: 11400000, guid: 35c51b08d7beff64892c312c1f56baa2, type: 2}
+  keyItem: 0
+  overworldItem: 1

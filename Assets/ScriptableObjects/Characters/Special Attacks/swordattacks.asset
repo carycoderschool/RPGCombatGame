@@ -18,10 +18,14 @@ MonoBehaviour:
   statusName1: Power Up
   statusName2: 
   statusName3: 
-  SAPrefab1: {fileID: 0}
+  SAPrefab1: {fileID: 755537041379064461, guid: 25221c206ca24c34f9fcd794fe088822,
+    type: 3}
   SAPrefab2: {fileID: 0}
   SAPrefab3: {fileID: 0}
   SAPrefab4: {fileID: 2940855438754211843, guid: eb82ab2c1730d334cb881a1d987bc65d,
     type: 3}
   SAPrefab5: {fileID: 0}
   SAPrefab6: {fileID: 0}
+  revive1: 0
+  revive2: 0
+  revive3: 0

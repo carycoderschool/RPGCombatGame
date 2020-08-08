@@ -22,14 +22,18 @@ public class SlimeSA : specialAttacksScript
                 attacker.SP -= 3;
                 float upAttack = attacker.attack *= 2;
                 float damage = upAttack - target.def;
+                if (damage < 1)
+                {
+                    damage = 1;
+                }
                 attacker.b.battleText.text = attacker.gameObject.name + " uses " + name;
                 attacker.gameObject.GetComponent<Animator>().SetBool("attack", true);
                 yield return new WaitForSeconds(1.2f);
                 if (target.status == "")
                 {
-                    target.status = "Poison";
-                    target.gameObject.GetComponent<SpriteRenderer>().color = new Color32(143, 0, 254, 255);
-                    target.statusDuration = 3;
+                    target.status = "Depressed";
+                    
+                    target.statusDuration = 2;
                 }
                 attacker.gameObject.GetComponent<Animator>().SetBool("attack", false);
                 yield return new WaitForSeconds(1.5f);
@@ -49,8 +53,8 @@ public class SlimeSA : specialAttacksScript
             }
             else
             {
-                int ran = Random.Range(0, attacker.b.lists.chars.Count);
-                attacker.b.battleTarget = attacker.b.lists.chars[ran];
+                int ran = Random.Range(0, attacker.b.charStats.Count);
+                attacker.b.battleTarget = attacker.b.charStats[ran];
                 attacker.StartCoroutine(attacker.b.enemyAttack(attacker.b.battleTarget));
             }
         }
@@ -107,8 +111,7 @@ public class SlimeSA : specialAttacksScript
             }
             else 
             {
-           
-            attacker.StartCoroutine(attacker.b.enemyAttack(attacker.b.battleTarget));
+                 attacker.StartCoroutine(attacker.b.enemyAttack(attacker.b.battleTarget));
             }
         
     }

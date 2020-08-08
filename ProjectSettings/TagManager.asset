@@ -12,6 +12,10 @@ TagManager:
   - NPC
   - Overworld Player
   - wall
+  - inventorySlots
+  - battleSystem
+  - boss
+  - secretBoss
   layers:
   - Default
   - TransparentFX

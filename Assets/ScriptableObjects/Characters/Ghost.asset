@@ -1,0 +1,29 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 138a64d93a546564896fd3a44c68e5ff, type: 3}
+  m_Name: Ghost
+  m_EditorClassIdentifier: 
+  nameChar: Ghosty
+  spec: {fileID: 11400000, guid: bbde4ffc1f953924481c175b697e3d68, type: 2}
+  icon: {fileID: 21300000, guid: 1a92d38f2cfa5ac43b62836f36a87f3f, type: 3}
+  HP: 42
+  SP: 15
+  ogHP: 0
+  ogSP: 0
+  def: 6
+  attack: 15
+  speed: 2
+  experience: 0
+  level: 0
+  nextExp: 0
+  defeatExp: 5
+  anim: {fileID: 9100000, guid: 71399e3ed730b8d4c9aef8e2f7d310bf, type: 2}

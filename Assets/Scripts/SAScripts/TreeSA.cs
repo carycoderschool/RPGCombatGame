@@ -45,8 +45,8 @@ public class TreeSA : specialAttacksScript
             }
             else
             {
-                int ran = Random.Range(0, attacker.b.lists.chars.Count);
-                attacker.b.battleTarget = attacker.b.lists.chars[ran];
+                int ran = Random.Range(0, attacker.b.charStats.Count);
+                attacker.b.battleTarget = attacker.b.charStats[ran];
                 attacker.StartCoroutine(attacker.b.enemyAttack(attacker.b.battleTarget));
             }
         }
@@ -67,9 +67,9 @@ public class TreeSA : specialAttacksScript
 
     public override void enemyAI(baseStats attacker)
     {
-        
-        int ran = Random.Range(0, attacker.b.lists.chars.Count);
-        attacker.b.battleTarget = attacker.b.lists.chars[ran];
+
+        int ran = Random.Range(0, attacker.b.charStats.Count);
+        attacker.b.battleTarget = attacker.b.charStats[ran];
         int attack = 0;
         List<GameObject> weakList = new List<GameObject>();
         foreach (baseStats charac in attacker.b.stats)

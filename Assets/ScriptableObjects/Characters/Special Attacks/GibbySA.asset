@@ -1,0 +1,33 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fe611d5399ad3c643939121bfb90b01b, type: 3}
+  m_Name: GibbySA
+  m_EditorClassIdentifier: 
+  physicalName1: Gibby Clones
+  physicalName2: Super Smack
+  physicalName3: Multi Hit
+  statusName1: Quick Heal
+  statusName2: 
+  statusName3: 
+  SAPrefab1: {fileID: 5435768904563836647, guid: 62f2ffc751765e54fb6ef5ef026183af,
+    type: 3}
+  SAPrefab2: {fileID: 755537041379064461, guid: 25221c206ca24c34f9fcd794fe088822,
+    type: 3}
+  SAPrefab3: {fileID: 3971616086724500583, guid: 6b6d5a60529a2d74496ac8e9799f3232,
+    type: 3}
+  SAPrefab4: {fileID: 834295674778803906, guid: 72056f9756f5da54abad5bc287c7ab2c,
+    type: 3}
+  SAPrefab5: {fileID: 0}
+  SAPrefab6: {fileID: 0}
+  revive1: 0
+  revive2: 0
+  revive3: 0

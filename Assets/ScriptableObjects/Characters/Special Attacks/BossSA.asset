@@ -1,0 +1,32 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2c32d5f34a3cbd947846e46ba9817834, type: 3}
+  m_Name: BossSA
+  m_EditorClassIdentifier: 
+  physicalName1: Firebreath
+  physicalName2: Knock Out Claw
+  physicalName3: 
+  statusName1: Scale Regeneration
+  statusName2: 
+  statusName3: 
+  SAPrefab1: {fileID: 4872084834352304539, guid: 38ce2ea6e8eaf5c458490b5cfd7d3b10,
+    type: 3}
+  SAPrefab2: {fileID: 755537041379064461, guid: 25221c206ca24c34f9fcd794fe088822,
+    type: 3}
+  SAPrefab3: {fileID: 0}
+  SAPrefab4: {fileID: 834295674778803906, guid: 72056f9756f5da54abad5bc287c7ab2c,
+    type: 3}
+  SAPrefab5: {fileID: 0}
+  SAPrefab6: {fileID: 0}
+  revive1: 0
+  revive2: 0
+  revive3: 0

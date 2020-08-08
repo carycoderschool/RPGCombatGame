@@ -1,0 +1,29 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 138a64d93a546564896fd3a44c68e5ff, type: 3}
+  m_Name: Bat
+  m_EditorClassIdentifier: 
+  nameChar: Cave Bat
+  spec: {fileID: 11400000, guid: dbdeaa48112796b409efa2b5ae63fd4a, type: 2}
+  icon: {fileID: 21300008, guid: 4af7f91b72d00c34b97829f31870ae3c, type: 3}
+  HP: 30
+  SP: 1
+  ogHP: 30
+  ogSP: 1
+  def: 10
+  attack: 17
+  speed: 7
+  experience: 0
+  level: 0
+  nextExp: 0
+  defeatExp: 1
+  anim: {fileID: 9100000, guid: 98ca348c59798124ab44f4cb42caf7f8, type: 2}

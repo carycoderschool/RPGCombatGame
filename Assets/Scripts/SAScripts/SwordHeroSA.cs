@@ -28,9 +28,12 @@ public class SwordHeroSA : specialAttacksScript
             }
             attacker.SP -= 5;
             float upAttack = attacker.attack * .50f;
-            float supAttack = attacker.attack += upAttack;
+            float supAttack = attacker.attack + upAttack;
             float damage = supAttack - target.def;
-
+            if (damage < 1)
+            {
+                damage = 1;
+            }
             target.HP -= damage;
             attacker.HP -= upAttack;
             if (target.GetComponent<baseStats>().HP < 1)
